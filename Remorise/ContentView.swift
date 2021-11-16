@@ -38,7 +38,9 @@ struct ContentView: View {
                 .clipShape(Circle())
                 
             }
-            // button cannot alignment leading pls help
+   
+            ScrollView(.horizontal) {
+                HStack {
                 Button {
                     
                 } label: {
@@ -51,6 +53,10 @@ struct ContentView: View {
                 .frame(alignment: .leading)
                 .background(Color("Beau Blue"))
                 .cornerRadius(30)
+                }
+                .padding()
+            }
+            
             
             VStack {
                 Text("No flashcards created yet")
