@@ -3,14 +3,13 @@
 //  Remorise
 //
 //  Created by Trinity Lee on 14/11/21.
-//
+// Home Screen
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
         VStack {
-            
             HStack {
                 VStack(alignment: .leading) {
                     Text("Welcome,")
@@ -39,8 +38,8 @@ struct ContentView: View {
                 
             }
    
-            ScrollView(.horizontal) {
-                HStack {
+            VStack(alignment: .leading) {
+                ScrollView(.horizontal) {
                 Button {
                     
                 } label: {
@@ -55,21 +54,22 @@ struct ContentView: View {
                 .cornerRadius(30)
                 }
                 .padding()
-            }
-            
-            
-            VStack {
-                Text("No flashcard stacks created yet, click the + button to start!")
-                    .foregroundColor(Color("Oxford Blue"))
-                    .font(.system(size: 23.0, design: .rounded))
-                    .frame(width: 420, height: 625.3, alignment: .center)
-                    .multilineTextAlignment(.center)
                 
-        
+                Text("No flashcard stacks created yet, click the + button to start!")
+                        .font(.system(size: 23, design: .rounded))
+                        .frame(height: 200)
+                        .multilineTextAlignment(.center)
+                        .padding(.leading, 10)
                     
+            
+                        
+                
             }
+            Spacer()
         }
+        
     }
+}
     
     
     struct ContentView_Previews: PreviewProvider {
@@ -77,5 +77,5 @@ struct ContentView: View {
             ContentView()
         }
     }
-}
+
 
