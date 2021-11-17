@@ -59,10 +59,13 @@ struct ContentView: View {
             
             
             VStack {
-                Text("No flashcards created yet")
+                Text("No flashcards created yet, click the + button to start!")
                     .foregroundColor(Color("Oxford Blue"))
-                    .font(.system(size: 25.0, design: .rounded))
-                    .frame(width: 500, height: 625.3, alignment: .center)
+                    .font(.system(size: 23.0, design: .rounded))
+                    .frame(width: 425, height: 625.3, alignment: .center)
+                    .multilineTextAlignment(.center)
+                
+        
                     
             }
         }
