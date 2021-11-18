@@ -17,8 +17,7 @@ struct CreateFlashcardSheet: View
     {
         NavigationView
         {
-            
-            //for "cancel" or "next"
+    
             VStack(alignment: .leading)
             {
                 
@@ -120,23 +119,13 @@ struct CreateFlashcardSheet: View
                 
                 Spacer()
             }
-            //            ZStack {
-            //                //rectangle and placeholder text
+            
         }
         .sheet(isPresented: $showSheet, content: {
             CreateTagSheet()
         })
     }
     
-    
-    //            }
-    //            ZStack {
-    //                //for rectangle and placeholder text
-    //            }
-    //            HStack {
-    //                //for all the tags
-    //            }
-    //        }
     
     struct CustomsTextEditor: View {
         
