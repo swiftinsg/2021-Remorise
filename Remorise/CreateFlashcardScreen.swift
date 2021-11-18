@@ -6,6 +6,8 @@
 // Create New Flashcard Screen
 import SwiftUI
 import Foundation
+
+
 struct CreateFlashcardScreen: View {
     @State private var currentFlashcard: Int = 0
     @ObservedObject private var flashcardManager = FlashcardManager()

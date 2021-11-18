@@ -9,7 +9,9 @@ import Foundation
 
 struct CreateFlashcardSheet: View
 {
+    
     @State private var text = ""
+    @State private var showSheet = false
     
     var body: some View
     {
@@ -46,16 +48,17 @@ struct CreateFlashcardSheet: View
                     {
                         Button("Cancel")
                         {
-                            print("button pressed")
+                            
                         }
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing)
                     {
-                        Button("Next")
-                        {
-                            print("button pressed")
-                        }
+                        NavigationLink(
+                            destination: CreateFlashcardScreen().navigationBarHidden(true),
+                            label: {
+                                Text("Next")
+                            })
                     }
                 }
                 
@@ -71,8 +74,8 @@ struct CreateFlashcardSheet: View
                 .frame(height: 240)
                 HStack(spacing: 10)
                 {
-                    Button
-                    {
+                    Button {
+                        showSheet = true
                         
                     } label:
                     {
@@ -120,7 +123,11 @@ struct CreateFlashcardSheet: View
             //            ZStack {
             //                //rectangle and placeholder text
         }
+        .sheet(isPresented: $showSheet, content: {
+            CreateTagSheet()
+        })
     }
+    
     
     //            }
     //            ZStack {
