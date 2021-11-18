@@ -55,16 +55,17 @@ struct ContentView: View {
                 .cornerRadius(30)
                 }
                 .padding()
+            
                 
+            }
+       
+            
+            VStack(alignment: .center) {
                 Text("No flashcard stacks created yet, click the + button to start!")
                         .font(.system(size: 23, design: .rounded))
                         .frame(height: 200)
                         .multilineTextAlignment(.center)
-                        .padding()
-                    
-            
-                        
-                
+                    .padding()
             }
             Spacer()
         }

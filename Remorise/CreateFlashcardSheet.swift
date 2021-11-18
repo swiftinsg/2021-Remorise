@@ -16,7 +16,7 @@ struct CreateFlashcardSheet: View
         NavigationView
         {
             
-              //for "cancel" or "next"
+            //for "cancel" or "next"
             VStack(alignment: .leading)
             {
                 
@@ -25,7 +25,7 @@ struct CreateFlashcardSheet: View
                     Text("Create")
                         .foregroundColor(Color("Cyan Blue"))
                         .font(.system(size: 40.0, weight: .bold, design: .rounded))
-
+                    
                     Text("Your")
                         .foregroundColor(Color("Maya Blue"))
                         .font(.system(size: 40.0, weight: .bold,design: .rounded))
@@ -49,7 +49,7 @@ struct CreateFlashcardSheet: View
                             print("button pressed")
                         }
                     }
-
+                    
                     ToolbarItem(placement: .navigationBarTrailing)
                     {
                         Button("Next")
@@ -58,13 +58,13 @@ struct CreateFlashcardSheet: View
                         }
                     }
                 }
-
-                ZStack(alignment: .leading)
+                
+                ZStack
                 {
                     Rectangle()
                         .foregroundColor(Color.init("Cyan Blue"))
-                        .frame(width: 390, height: 90)
-
+                        .frame(height: 90)
+                    
                     CustomsTextEditor.init(placeholder:"Name of Stack", text: $text)
                         .multilineTextAlignment(TextAlignment.center)
                 }
@@ -73,7 +73,7 @@ struct CreateFlashcardSheet: View
                 {
                     Button
                     {
-                            
+                        
                     } label:
                     {
                         Image(systemName: "plus")
@@ -84,10 +84,10 @@ struct CreateFlashcardSheet: View
                     .frame(width: 40, height: 40)
                     .background(Color("Beau Blue"))
                     .clipShape(Circle())
-                        
+                    
                     Button
                     {
-                            
+                        
                     } label:
                     {
                         Text("#history")
@@ -117,56 +117,56 @@ struct CreateFlashcardSheet: View
                 
                 Spacer()
             }
-//            ZStack {
-//                //rectangle and placeholder text
+            //            ZStack {
+            //                //rectangle and placeholder text
         }
     }
-
-//            }
-//            ZStack {
-//                //for rectangle and placeholder text
-//            }
-//            HStack {
-//                //for all the tags
-//            }
-//        }
-
-     struct CustomsTextEditor: View {
-
-         let placeholder: String
-         @Binding var text: String
-         let internalPadding: CGFloat = 5
-
-         var body: some View {
-
-             ZStack(alignment: .center) {
-                 if text.isEmpty {
-                     Text(placeholder)
-                         .foregroundColor(Color.primary.opacity(0.25))
-                         .fontWeight(.bold)
-                         .font(.system(size: 25))
-                         .accentColor(.green)
-                         .padding(EdgeInsets(top: 0, leading: 4, bottom: 3, trailing: 0))
-                         
-                         .padding(internalPadding)
-
-
-                 }
-                 TextEditor(text: $text)
-                     .frame(minHeight: 30)
-                     .fixedSize(horizontal: false, vertical: true)
-                     .padding(internalPadding)
-
-
-             }.onAppear() {
-                 UITextView.appearance().backgroundColor = UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 0)
-
-             }.onDisappear() {
-                 UITextView.appearance().backgroundColor = UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)
-             }
-         }
-     }
-
+    
+    //            }
+    //            ZStack {
+    //                //for rectangle and placeholder text
+    //            }
+    //            HStack {
+    //                //for all the tags
+    //            }
+    //        }
+    
+    struct CustomsTextEditor: View {
+        
+        let placeholder: String
+        @Binding var text: String
+        let internalPadding: CGFloat = 5
+        
+        var body: some View {
+            
+            ZStack(alignment: .center) {
+                if text.isEmpty {
+                    Text(placeholder)
+                        .foregroundColor(Color.primary.opacity(0.25))
+                        .fontWeight(.bold)
+                        .font(.system(size: 25))
+                        .accentColor(.green)
+                    
+                    
+                        .padding(internalPadding)
+                    
+                    
+                }
+                TextEditor(text: $text)
+                    .frame(minHeight: 30)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(internalPadding)
+                
+                
+            }.onAppear() {
+                UITextView.appearance().backgroundColor = UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 0)
+                
+            }.onDisappear() {
+                UITextView.appearance().backgroundColor = UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)
+            }
+        }
+    }
+    
     struct CreateFlashcardSheet_Previews: PreviewProvider
     {
         static var previews: some View
