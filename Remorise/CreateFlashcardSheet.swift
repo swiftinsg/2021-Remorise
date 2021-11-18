@@ -39,7 +39,7 @@ struct CreateFlashcardSheet: View
                         .font(.system(size: 40, weight: .bold, design: .rounded))
                 }
                 .padding()
-                .frame(height: 90)
+                .frame(height: 150)
                 .toolbar
                 {
                     ToolbarItem(placement: .navigationBarLeading)
