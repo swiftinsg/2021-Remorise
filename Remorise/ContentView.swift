@@ -59,7 +59,7 @@ struct ContentView: View {
                         .font(.system(size: 23, design: .rounded))
                         .frame(height: 200)
                         .multilineTextAlignment(.center)
-                        .padding(.leading, 10)
+                        .padding()
                     
             
                         
