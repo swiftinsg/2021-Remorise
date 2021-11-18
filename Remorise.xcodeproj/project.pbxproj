@@ -14,6 +14,7 @@
 		97F05B4D2741258800DC29FF /* RemoriseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F05B4C2741258800DC29FF /* RemoriseTests.swift */; };
 		97F05B582741258800DC29FF /* RemoriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F05B572741258800DC29FF /* RemoriseUITests.swift */; };
 		97F4AEE72744F797000D4EC1 /* CreateFlashcardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F4AEE62744F797000D4EC1 /* CreateFlashcardScreen.swift */; };
+		E7A7E9652745DC9B00CBFB4F /* CreateFlashcardSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7E9642745DC9B00CBFB4F /* CreateFlashcardSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		97F05B572741258800DC29FF /* RemoriseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoriseUITests.swift; sourceTree = "<group>"; };
 		97F05B592741258800DC29FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97F4AEE62744F797000D4EC1 /* CreateFlashcardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFlashcardScreen.swift; sourceTree = "<group>"; };
+		E7A7E9642745DC9B00CBFB4F /* CreateFlashcardSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFlashcardSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				97F05B3A2741257A00DC29FF /* RemoriseApp.swift */,
 				97F05B3C2741257A00DC29FF /* ContentView.swift */,
 				97F4AEE62744F797000D4EC1 /* CreateFlashcardScreen.swift */,
+				E7A7E9642745DC9B00CBFB4F /* CreateFlashcardSheet.swift */,
 				97F05B3E2741258800DC29FF /* Assets.xcassets */,
 				97F05B432741258800DC29FF /* Info.plist */,
 				97F05B402741258800DC29FF /* Preview Content */,
@@ -264,6 +267,7 @@
 			files = (
 				97F05B3D2741257A00DC29FF /* ContentView.swift in Sources */,
 				97F05B3B2741257A00DC29FF /* RemoriseApp.swift in Sources */,
+				E7A7E9652745DC9B00CBFB4F /* CreateFlashcardSheet.swift in Sources */,
 				97F4AEE72744F797000D4EC1 /* CreateFlashcardScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
