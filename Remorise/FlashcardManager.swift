@@ -14,9 +14,20 @@ struct Flashcard: Codable, Identifiable, Equatable {
     var id = UUID()
 }
 
+struct FlashcardStack: Codable, Identifiable, Equatable {
+    
+    var flashcards: [Flashcard]
+    var flashcardName: String
+    var flashcardTags: [String]
+    var id = UUID()
+}
+
+
+
+
 class FlashcardManager: ObservableObject {
     
-    @Published var flashcards: [Flashcard] = [Flashcard(question: "", answer: "")]
+    @Published var flashcardStacks: [FlashcardStack] = [FlashcardStack(flashcards: [], flashcardName: "Hi", flashcardTags: ["history", "geography"]), FlashcardStack(flashcards: [], flashcardName: "Hi", flashcardTags: ["history", "geography"])]
     
     func getArchiveURL() -> URL {
         let plistName = "flashcardData.plist"
@@ -29,7 +40,7 @@ class FlashcardManager: ObservableObject {
     func saveFlashcards() {
         let archiveURL = getArchiveURL()
         let propertyListEncoder = PropertyListEncoder()
-        let encodedFlashcards = try? propertyListEncoder.encode(flashcards)
+        let encodedFlashcards = try? propertyListEncoder.encode(flashcardStacks)
         try? encodedFlashcards?.write(to: archiveURL, options: .noFileProtection)
     }
     
@@ -40,8 +51,8 @@ class FlashcardManager: ObservableObject {
         
         
         if let retrievedFlashcardsData = try? Data(contentsOf: archiveURL),
-           let decodedFlashcards = try? propertyListDecoder.decode(Array<Flashcard>.self, from: retrievedFlashcardsData) {
-            flashcards = decodedFlashcards
+           let decodedFlashcards = try? propertyListDecoder.decode(Array<FlashcardStack>.self, from: retrievedFlashcardsData) {
+            flashcardStacks = decodedFlashcards
         }
     }
 }

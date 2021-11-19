@@ -10,16 +10,17 @@ import Foundation
 
 struct CreateFlashcardScreen: View {
     @State private var currentFlashcard: Int = 0
-    @ObservedObject private var flashcardManager = FlashcardManager()
+    @Binding var flashcards: [Flashcard]
     @State private var showingDiscardFlashcardStackAlert = false
     @State private var showingDiscardFlashcardAlert = false
+    var dismiss: () -> Void
     
     var body: some View {
         NavigationView {
             
             
             VStack {
-                Text("\(currentFlashcard+1)/\(flashcardManager.flashcards.count)")
+                Text("\(currentFlashcard+1)/\(flashcards.count)")
                     .padding(.bottom, 20)
                     .navigationTitle("Create Flashcards")
                     .navigationBarTitleDisplayMode(.inline)
@@ -42,7 +43,7 @@ struct CreateFlashcardScreen: View {
                         RoundedRectangle(cornerRadius: 25, style: .continuous)
                             .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
                             .frame(height: 220)
-                        CustomTextEditor.init(placeholder: "Type question here...", text: $flashcardManager.flashcards[currentFlashcard].question)
+                        CustomTextEditor(placeholder: "Type question here...", text: $flashcards[currentFlashcard].question)
                             .font(.system(.body, design: .rounded))
                             .multilineTextAlignment(TextAlignment.center)
                             .frame(height: 220)
@@ -50,7 +51,7 @@ struct CreateFlashcardScreen: View {
                     
                     
                     
-                    if currentFlashcard != flashcardManager.flashcards.count - 1 {
+                    if currentFlashcard != flashcards.count - 1 {
                         Button {
                             currentFlashcard += 1
                             
@@ -61,7 +62,7 @@ struct CreateFlashcardScreen: View {
                         }
                     } else {
                         Button {
-                            flashcardManager.flashcards.append(Flashcard(question: "", answer: ""))
+                            flashcards.append(Flashcard(question: "", answer: ""))
                             currentFlashcard += 1
                             
                         } label: {
@@ -153,23 +154,15 @@ struct CreateFlashcardScreen: View {
                 
                 ToolbarItem(placement: ToolbarItemPlacement.automatic) {
                     
-                    NavigationLink(
-                        destination: ContentView().navigationBarHidden(true),
-                        label: {
-                            Text("Done")
-                        })
+                    Button("Done") {
+                        dismiss()
+                    }
                 }
                 
                 
                 
                 
             }
-        }
-        .onAppear {
-            flashcardManager.loadFlashcards()
-        }
-        .onChange(of: flashcardManager.flashcards) { _ in
-            flashcardManager.saveFlashcards()
         }
         
             
@@ -221,7 +214,7 @@ struct CustomTextEditor: View {
 
 struct CreateFlashcardScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CreateFlashcardScreen()
+        CreateFlashcardScreen(flashcards: .constant([]), dismiss: {})
     }
 }
 }

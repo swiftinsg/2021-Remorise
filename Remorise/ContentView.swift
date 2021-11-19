@@ -9,11 +9,15 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @ObservedObject private var flashcardManager = FlashcardManager()
     @State private var isFlashcardPresented = false
     var body: some View {
         VStack {
-            HStack {
-                VStack(alignment: .leading) {
+            
+            HStack
+            {
+                VStack(alignment: .leading)
+                {
                     Text("Welcome,")
                         .foregroundColor(Color("Oxford Blue"))
                         .font(.system(size: 35.0, weight: .bold, design: .rounded))
@@ -25,26 +29,37 @@ struct ContentView: View {
                 }
                 .padding()
                 
-                
-                Button {
+                Button
+                {
                     isFlashcardPresented = true
-                } label: {
+                    
+                }
+            label:
+                {
                     Image(systemName: "plus")
                         .foregroundColor(Color("Oxford Blue"))
                         .font(.system(size: 30))
+                    
                 }
+                
+                
                 .padding()
-                .frame(width: 50, height: 40)
+                .frame(width: 50, height: 50)
                 .background(Color("Beau Blue"))
                 .clipShape(Circle())
                 
-            }
+            } // HStack
+            // button cannot alignment leading pls help
             
-            VStack(alignment: .leading) {
-                ScrollView(.horizontal) {
-                    Button {
+            ScrollView(.horizontal)
+            {
+                HStack(spacing:9)
+                {
+                    Button
+                    {
                         
-                    } label: {
+                    } label:
+                    {
                         Text("All")
                             .foregroundColor(Color("Oxford Blue"))
                             .font(.system(size: 20))
@@ -54,29 +69,137 @@ struct ContentView: View {
                     .frame(alignment: .leading)
                     .background(Color("Beau Blue"))
                     .cornerRadius(30)
-                }
-                .padding()
-                
-                
-            }
-            
-            
-            VStack(alignment: .center) {
-                Text("No flashcard stacks created yet, click the + button to start!")
-                    .font(.system(size: 23, design: .rounded))
-                    .frame(height: 200)
-                    .multilineTextAlignment(.center)
+                    
+                    Button
+                    {
+                        
+                    } label:
+                    {
+                        Text("#science")
+                            .foregroundColor(Color("Oxford Blue"))
+                            .font(.system(size: 20))
+                        
+                    }
                     .padding()
+                    .frame(alignment: .leading)
+                    .background(Color("Beau Blue"))
+                    .cornerRadius(30)
+                    
+                    
+                    Button
+                    {
+                        
+                    } label:
+                    {
+                        Text("#geography")
+                            .foregroundColor(Color("Oxford Blue"))
+                            .font(.system(size: 20))
+                        
+                    }
+                    .padding()
+                    .frame(alignment: .leading)
+                    .background(Color("Beau Blue"))
+                    .cornerRadius(30)
+                }
             }
-            Spacer()
-                .sheet(isPresented: $isFlashcardPresented) {
-                    CreateFlashcardSheet()
+            .padding(.horizontal)
+            
+            ScrollView {
+                ForEach(flashcardManager.flashcardStacks) { stack in
+                    
+                    
+                    
+                    ZStack(alignment: .topLeading)
+                    {
+                        RoundedRectangle(cornerRadius: 25,style: .continuous)
+                            .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                            .frame(maxWidth: .infinity)
+                        Group {
+                        HStack {
+                            Spacer()
+                            Menu {
+                                Button(action: {
+                                    
+                                }) {
+                                    Label("Quiz!", systemImage: "arrowtriangle.forward.fill")
+                                }
+                                Button(action: {
+                                    
+                                }) {
+                                    Label("Review", systemImage: "book.fill")
+                                }
+                                Button(action: {
+                                    
+                                }) {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+                            } label: {
+                                Image(systemName: "list.bullet")
+                            }
+                        .padding()
+                        }
+                        
+                        VStack(alignment:.leading)
+                        {
+                            
+                            
+                            
+                            Text("\(stack.flashcardName)")
+                                .foregroundColor(Color("Azure"))
+                                .font(.system(size: 40.0, weight: .bold, design: .rounded))
+                                .padding()
+                            
+                            
+                        
+                            HStack {
+                                ForEach (stack.flashcardTags, id: \.self) { tag in
+                                    Text("#\(tag)")
+                                            .foregroundColor(Color("Oxford Blue"))
+                                            .font(.system(size: 15))
+                                            .padding()
+                                            .background(Color.blue)
+                                        .cornerRadius(30)
+                                    
+                                    
+                                }
+                            }
+                                
+                      
+                            
+                           
+                            
+                            
+                        }
+                        }
+                        .padding()
+                    }
+                    .padding(.horizontal)
+                    
+                    
+                    
+                   
                     
                 }
+            }
+        }
+        .onAppear {
+            flashcardManager.loadFlashcards()
+            
         }
         
-    }
-}
+        .onChange(of: flashcardManager.flashcardStacks) { _ in
+            flashcardManager.saveFlashcards()
+        }
+        
+        .sheet(isPresented: $isFlashcardPresented) {
+            CreateFlashcardSheet()
+                .environmentObject(flashcardManager)
+        }
+        
+        
+    } // Vstack
+} // body View
+
 
 
 struct ContentView_Previews: PreviewProvider {

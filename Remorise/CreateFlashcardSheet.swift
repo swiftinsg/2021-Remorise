@@ -10,8 +10,11 @@ import Foundation
 struct CreateFlashcardSheet: View
 {
     
-    @State private var text = ""
-    @State private var showSheet = false
+    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [])
+    @State private var showTagSheet = false
+    @State private var showFlashcardSheet = false
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var flashcardManager: FlashcardManager
    
     
     var body: some View
@@ -54,11 +57,17 @@ struct CreateFlashcardSheet: View
                     
                     ToolbarItem(placement: .navigationBarTrailing)
                     {
-                        NavigationLink(
-                            destination: CreateFlashcardScreen().navigationBarHidden(true),
-                            label: {
-                                Text("Next")
-                            })
+                        
+//                        Button("Next") {
+//                            presentationMode.wrappedValue.dismiss()
+//                        }
+                        
+//                            destination: CreateFlashcardScreen(flashcards: $flashcardStack.flashcards).navigationBarHidden(true),
+                           Button("Next")  {
+                              
+                               showFlashcardSheet = true
+                               
+                            }
                     }
                 }
                 
@@ -68,14 +77,15 @@ struct CreateFlashcardSheet: View
                         .foregroundColor(Color.init("Cyan Blue"))
                         .frame(height: 90)
                     
-                    CustomsTextEditor.init(placeholder:"Name of Stack", text: $text)
+                    CustomsTextEditor.init(placeholder:"Name of Stack", text: $flashcardStack.flashcardName)
                         .multilineTextAlignment(TextAlignment.center)
                 }
                 .frame(height: 240)
+                
                 HStack(spacing: 10)
                 {
                     Button {
-                        showSheet = true
+                        showTagSheet = true
                         
                     } label:
                     {
@@ -88,32 +98,16 @@ struct CreateFlashcardSheet: View
                     .background(Color("Beau Blue"))
                     .clipShape(Circle())
                     
-                    Button
-                    {
+                    ForEach (flashcardStack.flashcardTags, id: \.self) { tag in
+                        Text("#\(tag)")
+                                .foregroundColor(Color("Oxford Blue"))
+                                .font(.system(size: 15))
+                                .padding()
+                                .background(Color.blue)
+                            .cornerRadius(30)
                         
-                    } label:
-                    {
-                        Text("#history")
-                            .foregroundColor(Color("Oxford Blue"))
-                            .font(.system(size: 15))
+                        
                     }
-                    .padding()
-                    .frame(alignment: .leading)
-                    .background(Color("Beau Blue"))
-                    .cornerRadius(30)
-                    
-                    Button
-                    {
-                    } label:
-                    {
-                        Text("#geography")
-                            .foregroundColor(Color("Oxford Blue"))
-                            .font(.system(size: 15))
-                    }
-                    .padding()
-                    .frame(alignment: .leading)
-                    .background(Color("Beau Blue"))
-                    .cornerRadius(30)
                 }
                 .padding()
                 .frame(height: 10)
@@ -122,8 +116,16 @@ struct CreateFlashcardSheet: View
             }
             
         }
-        .sheet(isPresented: $showSheet, content: {
+        .sheet(isPresented: $showTagSheet, content: {
             CreateTagSheet()
+        })
+        .fullScreenCover(isPresented: $showFlashcardSheet, content: {
+            CreateFlashcardScreen(flashcards: $flashcardStack.flashcards) {
+                showFlashcardSheet = false
+                flashcardManager.flashcardStacks.append(flashcardStack)
+                presentationMode.wrappedValue.dismiss()
+            }
+            
         })
         
     }
@@ -169,7 +171,7 @@ struct CreateFlashcardSheet: View
     {
         static var previews: some View
         {
-            CreateFlashcardSheet()
+            CreateFlashcardSheet().environmentObject(FlashcardManager())
         }
     }
 }
