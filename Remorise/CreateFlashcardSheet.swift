@@ -12,6 +12,7 @@ struct CreateFlashcardSheet: View
     
     @State private var text = ""
     @State private var showSheet = false
+   
     
     var body: some View
     {
@@ -124,8 +125,9 @@ struct CreateFlashcardSheet: View
         .sheet(isPresented: $showSheet, content: {
             CreateTagSheet()
         })
+        
     }
-    
+        
     
     struct CustomsTextEditor: View {
         

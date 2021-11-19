@@ -11,6 +11,8 @@ import Foundation
 struct CreateFlashcardScreen: View {
     @State private var currentFlashcard: Int = 0
     @ObservedObject private var flashcardManager = FlashcardManager()
+    @State private var showingDiscardFlashcardStackAlert = false
+    @State private var showingDiscardFlashcardAlert = false
     
     var body: some View {
         NavigationView {
@@ -87,12 +89,27 @@ struct CreateFlashcardScreen: View {
                         
                     }
                     Button {
-                        
+                        showingDiscardFlashcardAlert.toggle()
                     } label: {
                         Image(systemName:"minus.circle.fill")
                             .padding(.trailing)
                             .foregroundColor(.red)
                     }
+                    .alert(isPresented: $showingDiscardFlashcardAlert) {
+                                Alert(
+                                    title: Text("Deletion of Flashcard"),
+                                    message: Text("Are you sure you want to delete the current flashcard?"),
+                                    primaryButton: .destructive(Text("Cancel"), action: {
+                                        
+                                    }),
+                                    secondaryButton: .default(Text("OK"), action: {
+                                        
+                                    })
+                                )
+                        
+                    
+                    
+                }
                     
                     
                 }
@@ -113,10 +130,23 @@ struct CreateFlashcardScreen: View {
                 ToolbarItem(placement: ToolbarItemPlacement.navigation) {
                     
                     Button {
+                        showingDiscardFlashcardStackAlert.toggle()
                         
                     } label: {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
+                    }
+                    .alert(isPresented: $showingDiscardFlashcardStackAlert) {
+                        Alert(
+                            title: Text("Deletion of Stack"),
+                            message: Text("Are you sure you want to delete the ENTIRE stack?"),
+                            primaryButton: .destructive(Text("Cancel"), action: {
+                                
+                            }),
+                            secondaryButton: .default(Text("OK"), action: {
+                                
+                            })
+                        )
                     }
                     
                 }
@@ -140,7 +170,10 @@ struct CreateFlashcardScreen: View {
             flashcardManager.saveFlashcards()
         }
         
-    }
+            
+        
+    
+    
     
     
 }
@@ -188,4 +221,5 @@ struct CreateFlashcardScreen_Previews: PreviewProvider {
     static var previews: some View {
         CreateFlashcardScreen()
     }
+}
 }
