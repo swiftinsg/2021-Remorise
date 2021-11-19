@@ -110,6 +110,7 @@ struct ActiveRecallScreen: View {
                                 .foregroundColor(.red)
                         }
                         
+                    
                     }
                     
                     }
