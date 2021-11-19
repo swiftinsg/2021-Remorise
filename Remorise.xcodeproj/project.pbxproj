@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EF3A46227481D2E00FEE2FB /* ActiveRecallScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A46127481D2E00FEE2FB /* ActiveRecallScreen.swift */; };
 		97F05B3B2741257A00DC29FF /* RemoriseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F05B3A2741257A00DC29FF /* RemoriseApp.swift */; };
 		97F05B3D2741257A00DC29FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F05B3C2741257A00DC29FF /* ContentView.swift */; };
 		97F05B3F2741258800DC29FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97F05B3E2741258800DC29FF /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2EF3A46127481D2E00FEE2FB /* ActiveRecallScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRecallScreen.swift; sourceTree = "<group>"; };
 		97F05B372741257A00DC29FF /* Remorise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remorise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F05B3A2741257A00DC29FF /* RemoriseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoriseApp.swift; sourceTree = "<group>"; };
 		97F05B3C2741257A00DC29FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				97F05B3A2741257A00DC29FF /* RemoriseApp.swift */,
 				97F05B3C2741257A00DC29FF /* ContentView.swift */,
+				2EF3A46127481D2E00FEE2FB /* ActiveRecallScreen.swift */,
 				97F4AEE62744F797000D4EC1 /* CreateFlashcardScreen.swift */,
 				E7A7E9642745DC9B00CBFB4F /* CreateFlashcardSheet.swift */,
 				992935AA2746926000745887 /* CreateTagSheet.swift */,
@@ -276,6 +279,7 @@
 			files = (
 				97F05B3D2741257A00DC29FF /* ContentView.swift in Sources */,
 				97F05B3B2741257A00DC29FF /* RemoriseApp.swift in Sources */,
+				2EF3A46227481D2E00FEE2FB /* ActiveRecallScreen.swift in Sources */,
 				992935AB2746926000745887 /* CreateTagSheet.swift in Sources */,
 				992935AD2748146900745887 /* EditStackScreen.swift in Sources */,
 				992935A927460C7300745887 /* FlashcardManager.swift in Sources */,

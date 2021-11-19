@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @State private var showActiveRecallScreen = false
     @ObservedObject private var flashcardManager = FlashcardManager()
     @State private var isFlashcardPresented = false
     var body: some View {
@@ -119,6 +120,7 @@ struct ContentView: View {
                             Spacer()
                             Menu {
                                 Button(action: {
+                                    showActiveRecallScreen = true
                                     
                                 }) {
                                     Label("Quiz!", systemImage: "arrowtriangle.forward.fill")
@@ -195,6 +197,9 @@ struct ContentView: View {
             CreateFlashcardSheet()
                 .environmentObject(flashcardManager)
         }
+        .fullScreenCover(isPresented: $showActiveRecallScreen, content: {
+            ActiveRecallScreen()
+        })
         
         
     } // Vstack
