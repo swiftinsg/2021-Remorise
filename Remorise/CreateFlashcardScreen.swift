@@ -153,9 +153,11 @@ struct CreateFlashcardScreen: View {
                 
                 ToolbarItem(placement: ToolbarItemPlacement.automatic) {
                     
-                    Button("Done") {
-                        
-                    }
+                    NavigationLink(
+                        destination: ContentView().navigationBarHidden(true),
+                        label: {
+                            Text("Done")
+                        })
                 }
                 
                 
