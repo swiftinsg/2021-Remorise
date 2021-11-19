@@ -25,7 +25,7 @@ class TextFieldManager: ObservableObject {
 
 struct CreateTagSheet: View {
     
-   
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var textFieldManager = TextFieldManager()
     
     
@@ -58,7 +58,7 @@ struct CreateTagSheet: View {
                 ToolbarItem(placement: ToolbarItemPlacement.navigation) {
                     
                     Button("Cancel") {
-                        
+                        presentationMode.wrappedValue.dismiss()
                     }
                     .foregroundColor(.red)
                     

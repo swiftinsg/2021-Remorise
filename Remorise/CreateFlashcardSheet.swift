@@ -51,7 +51,7 @@ struct CreateFlashcardSheet: View
                     {
                         Button("Cancel")
                         {
-                            
+                            presentationMode.wrappedValue.dismiss()
                         }
                     }
                     
