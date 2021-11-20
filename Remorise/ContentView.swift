@@ -156,10 +156,10 @@ struct ContentView: View {
                                 HStack {
                                     ForEach (stack.flashcardTags, id: \.self) { tag in
                                         Text("#\(tag)")
-                                            .foregroundColor(.white)
+                                            .foregroundColor(Color("Oxford Blue"))
                                             .font(.system(size: 15, weight: .regular, design: .rounded))
                                             .padding(15)
-                                            .background(Color.blue)
+                                            .background(Color("ButtonStack Color"))
                                             .cornerRadius(30)
                                         
                                         
