@@ -116,62 +116,62 @@ struct ContentView: View {
                             .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
                             .frame(maxWidth: .infinity)
                         Group {
-                        HStack {
-                            Spacer()
-                            Menu {
-                                Button(action: {
-                                    showActiveRecallScreen = true
-                                    
-                                }) {
-                                    Label("Quiz!", systemImage: "arrowtriangle.forward.fill")
-                                }
-                                Button(action: {
-                                    
-                                }) {
-                                    Label("Review", systemImage: "book.fill")
-                                }
-                                Button(action: {
-                                    
-                                }) {
-                                    Label("Edit", systemImage: "pencil")
-                                }
-                            } label: {
-                                Image(systemName: "list.bullet")
-                            }
-                        .padding()
-                        }
-                        
-                        VStack(alignment:.leading)
-                        {
-                            
-                            
-                            
-                            Text("\(stack.flashcardName)")
-                                .foregroundColor(Color("Azure"))
-                                .font(.system(size: 40.0, weight: .bold, design: .rounded))
-                                .padding()
-                            
-                            
-                        
                             HStack {
-                                ForEach (stack.flashcardTags, id: \.self) { tag in
-                                    Text("#\(tag)")
-                                            .foregroundColor(Color("Oxford Blue"))
-                                            .font(.system(size: 15))
-                                            .padding()
-                                            .background(Color.blue)
-                                        .cornerRadius(30)
-                                    
-                                    
+                                Spacer()
+                                Menu {
+                                    Button(action: {
+                                        showActiveRecallScreen = true
+                                        
+                                    }) {
+                                        Label("Quiz!", systemImage: "arrowtriangle.forward.fill")
+                                    }
+                                    Button(action: {
+                                        
+                                    }) {
+                                        Label("Review", systemImage: "book.fill")
+                                    }
+                                    Button(action: {
+                                        
+                                    }) {
+                                        Label("Edit", systemImage: "pencil")
+                                    }
+                                } label: {
+                                    Image(systemName: "list.bullet")
                                 }
+                                .padding()
                             }
+                            
+                            VStack(alignment:.leading)
+                            {
                                 
-                      
-                            
-                           
-                            
-                            
-                        }
+                                
+                                
+                                Text("\(stack.flashcardName)")
+                                    .foregroundColor(Color("Azure"))
+                                    .font(.system(size: 40.0, weight: .bold, design: .rounded))
+                                    .padding()
+                                
+                                
+                                
+                                HStack {
+                                    ForEach (stack.flashcardTags, id: \.self) { tag in
+                                        Text("#\(tag)")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 15, weight: .regular, design: .rounded))
+                                            .padding(15)
+                                            .background(Color.blue)
+                                            .cornerRadius(30)
+                                        
+                                        
+                                    }
+                                }
+                                
+                                
+                                
+                                
+                                
+                                
+                            }
                         }
                         .padding()
                     }
@@ -179,7 +179,7 @@ struct ContentView: View {
                     
                     
                     
-                   
+                    
                     
                 }
             }
