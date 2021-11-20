@@ -1,24 +1,25 @@
 //
 //  CreateFlashcardScreen.swift
-//  Remorise
+//  RemBasicCode
 //
-//  Created by Trinity Lee on 17/11/21.
-// Create New Flashcard Screen
+//  Created by Trinity Lee on 19/11/21.
+//
+
 import SwiftUI
 import Foundation
 
 
 struct CreateFlashcardScreen: View {
-    @State private var setColor = Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1))
     @State private var currentFlashcard: Int = 0
     @Binding var flashcards: [Flashcard]
     @State private var showingDiscardFlashcardStackAlert = false
     @State private var showingDiscardFlashcardAlert = false
+    @State var flipped = false
     var dismiss: () -> Void
-    
     
     var body: some View {
         NavigationView {
+            
             
             VStack {
                 Text("\(currentFlashcard+1)/\(flashcards.count)")
@@ -32,29 +33,48 @@ struct CreateFlashcardScreen: View {
                         if currentFlashcard != 0 {
                             
                             currentFlashcard -= 1
+                            flipped = false
                         }
                     } label: {
                         Image(systemName:"arrow.left")
                             .padding(.leading)
-                         //   .foregroundColor(.black.opacity(currentFlashcard != 0 ? 1 : 0))
+                            .foregroundColor(.black)
+                            .opacity(currentFlashcard != 0 ? 1 : 0)
                     }
+                    FlipFlashcard(flipped: $flipped, front: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 25, style: .continuous)
+                                    .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                                    .frame(height: 220)
+                                CustomTextEditor(placeholder: "Type question here...", bold: true, text: $flashcards[currentFlashcard].question)
+                            }
+                        }, back: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 25, style: .continuous)
+                                    .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                                    .frame(height: 220)
+                                CustomTextEditor(placeholder: "Type answer here...", bold: false, text: $flashcards[currentFlashcard].answer)
+                            }
+                        })
                     
                     
-                    ZStack(alignment: .topLeading) {
-                        RoundedRectangle(cornerRadius: 25, style: .continuous)
-                            .fill(setColor)
-                            .frame(height:220)
-                        CustomTextEditor(placeholder: "Type question here...", text: $flashcards[currentFlashcard].question)
-                            .font(.system(.body, design: .rounded))
-                            .multilineTextAlignment(TextAlignment.center)
-                            .frame(height: 220)
-                    }
+                    
+//                    ZStack(alignment: .topLeading) {
+//                        RoundedRectangle(cornerRadius: 25, style: .continuous)
+//                            .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+//                            .frame(height: 220)
+//                        CustomTextEditor(placeholder: "Type question here...", text: $flashcards[currentFlashcard].question)
+//                            .font(.system(.body, design: .rounded))
+//                            .multilineTextAlignment(TextAlignment.center)
+//                            .frame(height: 220)
+//                    }
                     
                     
                     
                     if currentFlashcard != flashcards.count - 1 {
                         Button {
                             currentFlashcard += 1
+                            flipped = false
                             
                         } label: {
                             Image(systemName:"arrow.right")
@@ -65,6 +85,7 @@ struct CreateFlashcardScreen: View {
                         Button {
                             flashcards.append(Flashcard(question: "", answer: ""))
                             currentFlashcard += 1
+                            flipped = false
                             
                         } label: {
                             Image(systemName:"plus")
@@ -77,7 +98,9 @@ struct CreateFlashcardScreen: View {
                 
                 HStack(spacing: 10) {
                     Button {
-                        
+                        withAnimation {
+                            flipped.toggle()
+                        }
                     } label: {
                         ZStack{
                             Capsule()
@@ -117,35 +140,15 @@ struct CreateFlashcardScreen: View {
                 }
                 .padding(.bottom, 1)
                 HStack(spacing: 30) {
-                    Button(action: {
-                        setColor = Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1))
-                            }){
-                                ZStack{
-                                    Circle()
-                                        .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
-                                        .frame(width: 20, height: 20)
-                                }
-                            }
-                    Button(action: {
-                        setColor = Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1))
-                            }){
-                                ZStack{
-                                    Circle()
-                                        .fill(Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1)))
-                                        .frame(width: 20, height: 20)
-                                }
-                            }
-                    Button(action: {
-                        setColor = Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1))
-                            }){
-                                ZStack{
-                                    Circle()
-                                        .fill(Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1)))
-                                        .frame(width: 20, height: 20)
-                                }
-                            }
-
-
+                    Circle()
+                        .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                        .frame(width: 20, height: 20)
+                    Circle()
+                        .fill(Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1)))
+                        .frame(width: 20, height: 20)
+                    Circle()
+                        .fill(Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1)))
+                        .frame(width: 20, height: 20)
                 }
             }
             .toolbar {
@@ -198,6 +201,7 @@ struct CreateFlashcardScreen: View {
 struct CustomTextEditor: View {
     
     let placeholder: String
+    let bold: Bool
     @Binding var text: String
     let internalPadding: CGFloat = 5
     
@@ -215,15 +219,13 @@ struct CustomTextEditor: View {
                 
                 
             }
-            ScrollView{
-                TextEditor(text: $text)
-                    .frame(minHeight: 30)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(internalPadding)
-                                
-            }
+            TextEditor(text: $text)
+                .font(.system(size: 12, weight: bold ? Font.Weight.bold : Font.Weight.regular, design: .rounded))
+                .frame(minHeight: 30)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(internalPadding)
             
-                        
             
         }.onAppear() {
             UITextView.appearance().backgroundColor = UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 0)
@@ -238,9 +240,41 @@ struct CustomTextEditor: View {
 
 struct CreateFlashcardScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CreateFlashcardScreen(flashcards: .constant([]), dismiss: {})
+        CreateFlashcardScreen(flashcards: .constant([Flashcard(question: "", answer: "")]), dismiss: {})
     }
 }
 }
 
-
+struct FlipFlashcard<Front, Back>: View where Front: View, Back: View {
+    var front: () -> Front
+    var back: () -> Back
+    
+    @Binding var flipped: Bool
+    
+    init(flipped: Binding<Bool>, @ViewBuilder front: @escaping () -> Front, @ViewBuilder back: @escaping () -> Back) {
+        self.front = front
+        self.back = back
+        self._flipped = flipped
+    }
+    
+    var body: some View {
+        ZStack {
+            if flipped {
+                back()
+                    .rotation3DEffect(.degrees(flipped ? 180 : 0), axis: (x: 1, y: 0, z: 0))
+            } else {
+                front()
+            }
+        }
+        .rotation3DEffect(.degrees(flipped ? 180 : 0), axis: (x: 1, y: 0, z: 0))
+        .padding()
+        .frame(height: 200)
+        .frame(maxWidth: .infinity)
+        
+//            //tap gesture recogniser to flip flashcard
+//            .onTapGesture {
+//                flipFlashcard()
+//            }
+//            .rotation3DEffect(.degrees(flashcardRotation), axis: (x: 0, y: 1, z: 0))
+    }
+} // end of FlipFlashcard struct
