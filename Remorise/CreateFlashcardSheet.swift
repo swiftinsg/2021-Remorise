@@ -120,9 +120,11 @@ struct CreateFlashcardSheet: View
             CreateTagSheet()
         })
         .fullScreenCover(isPresented: $showFlashcardSheet, content: {
-            CreateFlashcardScreen(flashcards: $flashcardStack.flashcards) { _ in
+            CreateFlashcardScreen(flashcards: $flashcardStack.flashcards) { shouldSave in
                 showFlashcardSheet = false
+                if shouldSave {
                 flashcardManager.flashcardStacks.append(flashcardStack)
+                }
                 presentationMode.wrappedValue.dismiss()
             }
             
