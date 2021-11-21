@@ -12,6 +12,11 @@ struct ContentView: View {
     @State private var showActiveRecallScreen = false
     @ObservedObject private var flashcardManager = FlashcardManager()
     @State private var isFlashcardPresented = false
+    @State private var viewFlashcardStackScreen = false
+    @State private var currentFlashcard: Int = 0
+    
+    
+    
     var body: some View {
         VStack {
             
@@ -126,7 +131,7 @@ struct ContentView: View {
                                         Label("Quiz!", systemImage: "arrowtriangle.forward.fill")
                                     }
                                     Button(action: {
-                                        
+                                        viewFlashcardStackScreen = true
                                     }) {
                                         Label("Review", systemImage: "book.fill")
                                     }
@@ -201,6 +206,10 @@ struct ContentView: View {
             ActiveRecallScreen()
         })
         
+//        .fullScreenCover(isPresented: $viewFlashcardStackScreen, content: {
+//            ViewFlashcardScreen()
+//        })
+//        
         
     } // Vstack
 } // body View
