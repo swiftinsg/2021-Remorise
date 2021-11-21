@@ -22,7 +22,7 @@ struct ViewFlashcardScreen: View {
     
     var body: some View {
         NavigationView {
-            
+
             
             VStack {
                 Text("\(currentFlashcard+1)/\(flashcards.count)")
@@ -110,25 +110,26 @@ struct ViewFlashcardScreen: View {
                 }
                     
                     
-                }
+                
                 .padding(.bottom, 1)
-                
+
+                                
             }
-        .toolbar {
-            ToolbarItem(placement: ToolbarItemPlacement.navigation) {
+            .toolbar {
+                ToolbarItem(placement: ToolbarItemPlacement.navigation) {
                 
-                Button {
+                    Button {
                     presentationMode.wrappedValue.dismiss()
                     
-                } label: {
-                    Image(systemName: "arrow.left")
-                        .foregroundColor(.red)
-                }
+                    } label: {
+                        Image(systemName: "arrow.left")
+                            .foregroundColor(.red)
+                    }
                 
             
-            }
+                }
             
-            }
+                }
         }
         
             
@@ -149,3 +150,4 @@ struct ViewFlashcardScreen_Previews: PreviewProvider {
 
 
 
+}

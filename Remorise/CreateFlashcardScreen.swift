@@ -8,10 +8,10 @@
 import SwiftUI
 import Foundation
 
-//enum BlueColor: String, Codable {
-//   case blue1
+//enum BlueColor: Codable {
+//   case lightBlue
 //   case blue2
-//   case blue3
+//   case darkBlue
 //}
 //
 //
@@ -19,11 +19,11 @@ import Foundation
 //    var value: UIColor {
 //        get {
 //            switch self {
-//            case .blue1:
+//            case .lightBlue:
 //                return UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)
 //            case .blue2:
 //                return UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1)
-//            case .blue3:
+//            case .darkBlue:
 //                return UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1)
 //
 //
@@ -31,6 +31,8 @@ import Foundation
 //        }
 //    }
 //}
+//
+
 
 
 
@@ -41,7 +43,6 @@ struct CreateFlashcardScreen: View {
     @State private var showingDiscardFlashcardAlert = false
     @State var flipped = false
     var dismiss: () -> Void
-   // var myColor = [BlueColor]
     
     var body: some View {
         NavigationView {
@@ -70,8 +71,7 @@ struct CreateFlashcardScreen: View {
                     FlipFlashcard(flipped: $flipped, front: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                    .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1))
-)
+                                   // .fill(BlueColor.lightBlue.value)
                                     .frame(height: 220)
                                 CustomTextEditor(placeholder: "Type question here...", bold: true, text: $flashcards[currentFlashcard].question)
                             }
