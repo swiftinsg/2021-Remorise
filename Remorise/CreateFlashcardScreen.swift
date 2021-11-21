@@ -8,15 +8,40 @@
 import SwiftUI
 import Foundation
 
+//enum BlueColor: String, Codable {
+//   case blue1
+//   case blue2
+//   case blue3
+//}
+//
+//
+//extension BlueColor {
+//    var value: UIColor {
+//        get {
+//            switch self {
+//            case .blue1:
+//                return UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)
+//            case .blue2:
+//                return UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1)
+//            case .blue3:
+//                return UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1)
+//
+//
+//            }
+//        }
+//    }
+//}
+
+
 
 struct CreateFlashcardScreen: View {
-    @State private var letColor = Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1))
     @State private var currentFlashcard: Int = 0
     @Binding var flashcards: [Flashcard]
     @State private var showingDiscardFlashcardStackAlert = false
     @State private var showingDiscardFlashcardAlert = false
     @State var flipped = false
     var dismiss: () -> Void
+   // var myColor = [BlueColor]
     
     var body: some View {
         NavigationView {
@@ -45,14 +70,15 @@ struct CreateFlashcardScreen: View {
                     FlipFlashcard(flipped: $flipped, front: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                    .fill(letColor)
+                                    .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1))
+)
                                     .frame(height: 220)
                                 CustomTextEditor(placeholder: "Type question here...", bold: true, text: $flashcards[currentFlashcard].question)
                             }
                         }, back: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                    .fill(letColor)
+                                    .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
                                     .frame(height: 220)
                                 CustomTextEditor(placeholder: "Type answer here...", bold: false, text: $flashcards[currentFlashcard].answer)
                             }
@@ -142,7 +168,7 @@ struct CreateFlashcardScreen: View {
                 .padding(.bottom, 1)
                 HStack(spacing: 30) {
                     Button(action: {
-                        letColor = Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1))
+
                     }){
                         ZStack{
                             Circle()
@@ -150,7 +176,7 @@ struct CreateFlashcardScreen: View {
                         }
                     }
                     Button(action: {
-                        letColor = Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1))
+                       
                     }){
                         ZStack{
                             Circle()
@@ -158,7 +184,6 @@ struct CreateFlashcardScreen: View {
                         }
                     }
                     Button(action: {
-                        letColor = Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1))
                         
                     }){
                         ZStack{

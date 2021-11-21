@@ -14,6 +14,8 @@ struct ViewFlashcardScreen: View {
     @Binding var flashcards: [Flashcard]
     @State private var showingDiscardFlashcardStackAlert = false
     @State private var showingDiscardFlashcardAlert = false
+    @Environment(\.presentationMode) var presentationMode
+
    
     @State var flipped = false
     var dismiss: () -> Void
@@ -25,8 +27,9 @@ struct ViewFlashcardScreen: View {
             VStack {
                 Text("\(currentFlashcard+1)/\(flashcards.count)")
                     .padding(.bottom, 20)
-                    .navigationTitle("View Flashcards")
-                    .navigationBarTitleDisplayMode(.inline)
+                
+                        .navigationTitle("View Flashcards")
+                        .navigationBarTitleDisplayMode(.inline)
                 HStack(alignment: .center, spacing: 10) {
                     
                     Button {
@@ -111,18 +114,20 @@ struct ViewFlashcardScreen: View {
                 .padding(.bottom, 1)
                 
             }
-            .toolbar {
+        .toolbar {
+            ToolbarItem(placement: ToolbarItemPlacement.navigation) {
                 
-                ToolbarItem(placement: ToolbarItemPlacement.automatic) {
+                Button {
+                    presentationMode.wrappedValue.dismiss()
                     
-                    Button("Done") {
-                        dismiss()
-                    }
+                } label: {
+                    Image(systemName: "arrow.left")
+                        .foregroundColor(.red)
                 }
                 
-                
-                
-                
+            
+            }
+            
             }
         }
         

@@ -206,9 +206,9 @@ struct ContentView: View {
             ActiveRecallScreen()
         })
         
-//        .fullScreenCover(isPresented: $viewFlashcardStackScreen, content: {
-//            ViewFlashcardScreen()
-//        })
+      .fullScreenCover(isPresented: $viewFlashcardStackScreen, content: {
+          ViewFlashcardScreen(flashcards: .constant([Flashcard(question: "", answer: "")]), dismiss: {})
+       })
 //        
         
     } // Vstack
