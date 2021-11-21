@@ -42,6 +42,7 @@ struct CreateFlashcardScreen: View {
     @State private var showingDiscardFlashcardStackAlert = false
     @State private var showingDiscardFlashcardAlert = false
     @State var flipped = false
+    @State private var showHomeScreen = false
     var dismiss: (Bool) -> Void
     
     var body: some View {
@@ -193,7 +194,10 @@ struct CreateFlashcardScreen: View {
                     }
                     
                 }
-            }
+            } //end of VStack
+            .fullScreenCover(isPresented: $showHomeScreen, content: {
+                        ContentView()
+                    })
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.navigation) {
                     
