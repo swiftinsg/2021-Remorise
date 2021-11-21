@@ -220,7 +220,7 @@ struct CustomTextEditor: View {
                 
             }
             TextEditor(text: $text)
-                .font(.system(size: 12, weight: bold ? Font.Weight.bold : Font.Weight.regular, design: .rounded))
+                .font(.system(size: 25, weight: bold ? Font.Weight.bold : Font.Weight.regular, design: .rounded))
                 .frame(minHeight: 30)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
