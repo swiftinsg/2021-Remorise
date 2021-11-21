@@ -15,7 +15,7 @@ struct CreateFlashcardScreen: View {
     @State private var showingDiscardFlashcardStackAlert = false
     @State private var showingDiscardFlashcardAlert = false
     @State var flipped = false
-    var dismiss: () -> Void
+    var dismiss: (Bool) -> Void
     
     var body: some View {
         NavigationView {
@@ -124,10 +124,10 @@ struct CreateFlashcardScreen: View {
                                 Alert(
                                     title: Text("Deletion of Flashcard"),
                                     message: Text("Are you sure you want to delete the current flashcard?"),
-                                    primaryButton: .destructive(Text("Cancel"), action: {
+                                    primaryButton: .default(Text("Cancel"), action: {
                                         
                                     }),
-                                    secondaryButton: .default(Text("OK"), action: {
+                                    secondaryButton: .destructive(Text("OK"), action: {
                                         
                                     })
                                 )
@@ -161,32 +161,32 @@ struct CreateFlashcardScreen: View {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
                     }
-                    .alert(isPresented: $showingDiscardFlashcardStackAlert) {
-                        Alert(
-                            title: Text("Deletion of Stack"),
-                            message: Text("Are you sure you want to delete the ENTIRE stack?"),
-                            primaryButton: .destructive(Text("Cancel"), action: {
-                                
-                            }),
-                            secondaryButton: .default(Text("OK"), action: {
-                                
-                            })
-                        )
-                    }
                     
                 }
                 
                 ToolbarItem(placement: ToolbarItemPlacement.automatic) {
                     
                     Button("Done") {
-                        dismiss()
+                        dismiss(true)
                     }
                 }
                 
                 
                 
                 
-            }
+            } //end of toolbar
+            .alert(isPresented: $showingDiscardFlashcardStackAlert) {
+                Alert(
+                    title: Text("Deletion of Stack"),
+                    message: Text("Are you sure you want to delete the ENTIRE stack?"),
+                    primaryButton: .default(Text("Cancel"), action: {
+                        
+                    }),
+                    secondaryButton: .destructive(Text("OK"), action: {
+                        dismiss(false)
+                    })
+                )
+            } //end of alert
         }
         
             
@@ -240,7 +240,7 @@ struct CustomTextEditor: View {
 
 struct CreateFlashcardScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CreateFlashcardScreen(flashcards: .constant([Flashcard(question: "", answer: "")]), dismiss: {})
+        CreateFlashcardScreen(flashcards: .constant([Flashcard(question: "", answer: "")]), dismiss: {_ in })
     }
 }
 }
