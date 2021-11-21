@@ -10,6 +10,7 @@ import Foundation
 
 
 struct CreateFlashcardScreen: View {
+    @State private var letColor = Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1))
     @State private var currentFlashcard: Int = 0
     @Binding var flashcards: [Flashcard]
     @State private var showingDiscardFlashcardStackAlert = false
@@ -44,14 +45,14 @@ struct CreateFlashcardScreen: View {
                     FlipFlashcard(flipped: $flipped, front: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                    .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                                    .fill(letColor)
                                     .frame(height: 220)
                                 CustomTextEditor(placeholder: "Type question here...", bold: true, text: $flashcards[currentFlashcard].question)
                             }
                         }, back: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                    .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                                    .fill(letColor)
                                     .frame(height: 220)
                                 CustomTextEditor(placeholder: "Type answer here...", bold: false, text: $flashcards[currentFlashcard].answer)
                             }
@@ -140,15 +141,32 @@ struct CreateFlashcardScreen: View {
                 }
                 .padding(.bottom, 1)
                 HStack(spacing: 30) {
-                    Circle()
-                        .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
-                        .frame(width: 20, height: 20)
-                    Circle()
-                        .fill(Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1)))
-                        .frame(width: 20, height: 20)
-                    Circle()
-                        .fill(Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1)))
-                        .frame(width: 20, height: 20)
+                    Button(action: {
+                        letColor = Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1))
+                    }){
+                        ZStack{
+                            Circle()
+                                .frame(width: 20, height: 20)
+                        }
+                    }
+                    Button(action: {
+                        letColor = Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1))
+                    }){
+                        ZStack{
+                            Circle()
+                                .frame(width: 20, height: 20)
+                        }
+                    }
+                    Button(action: {
+                        letColor = Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1))
+                        
+                    }){
+                        ZStack{
+                            Circle()
+                                .frame(width: 20, height: 20)
+                        }
+                    }
+                    
                 }
             }
             .toolbar {
@@ -220,7 +238,7 @@ struct CustomTextEditor: View {
                 
             }
             TextEditor(text: $text)
-                .font(.system(size: 12, weight: bold ? Font.Weight.bold : Font.Weight.regular, design: .rounded))
+                .font(.system(size: 25, weight: bold ? Font.Weight.bold : Font.Weight.regular, design: .rounded))
                 .frame(minHeight: 30)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
