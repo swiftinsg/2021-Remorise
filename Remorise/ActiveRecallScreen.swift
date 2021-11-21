@@ -63,7 +63,7 @@ struct ActiveRecallScreen: View {
                         
                         ZStack(alignment: .topLeading) {
                                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                                    .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                                                    .fill(letColor)
                                                     .frame(height: 220)
                                                     .overlay( Text("Question/answer goes here"))
                                                     .multilineTextAlignment(TextAlignment.center)
