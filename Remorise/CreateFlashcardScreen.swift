@@ -72,15 +72,17 @@ struct CreateFlashcardScreen: View {
                     FlipFlashcard(flipped: $flipped, front: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                   // .fill(BlueColor.lightBlue.value)
+                                   .fill(Color("Beau Blue"))
                                     .frame(height: 220)
                                 CustomTextEditor(placeholder: "Type question here...", bold: true, text: $flashcards[currentFlashcard].question)
                             }
                         }, back: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                    .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                                    .fill(Color("Beau Blue"))
                                     .frame(height: 220)
+                                
+                                
                                 CustomTextEditor(placeholder: "Type answer here...", bold: false, text: $flashcards[currentFlashcard].answer)
                             }
                         })
@@ -231,6 +233,7 @@ struct CreateFlashcardScreen: View {
                     }),
                     secondaryButton: .destructive(Text("OK"), action: {
                         dismiss(false)
+                        showHomeScreen = true
                     })
                 )
             } //end of alert

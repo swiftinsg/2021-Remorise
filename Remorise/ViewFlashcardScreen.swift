@@ -11,14 +11,10 @@ import Foundation
 
 struct ViewFlashcardScreen: View {
     @State private var currentFlashcard: Int = 0
-    @Binding var flashcards: [Flashcard]
-    @State private var showingDiscardFlashcardStackAlert = false
-    @State private var showingDiscardFlashcardAlert = false
+    var flashcards: [Flashcard]
     @Environment(\.presentationMode) var presentationMode
-
-   
     @State var flipped = false
-    var dismiss: () -> Void
+   
     
     var body: some View {
         NavigationView {
@@ -30,6 +26,7 @@ struct ViewFlashcardScreen: View {
                 
                         .navigationTitle("View Flashcards")
                         .navigationBarTitleDisplayMode(.inline)
+                
                 HStack(alignment: .center, spacing: 10) {
                     
                     Button {
@@ -50,9 +47,9 @@ struct ViewFlashcardScreen: View {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
                                     .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
                                     .frame(height: 220)
-//
-//                                Text(FlashcardStack(Flashcard[currentFlashcard].question))
-//                                    .font(.system(size: 20, weight: .bold, design: .rounded))
+
+                                Text(flashcards[currentFlashcard].question)
+                                    .font(.system(size: 20, weight: .bold, design: .rounded))
                             }
                         }, back: {
                             ZStack {
@@ -60,8 +57,11 @@ struct ViewFlashcardScreen: View {
                                     .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
                                     .frame(height: 220)
                                 
-//                                Text(FlashcardStack(Flashcard[currentFlashcard].answer))
-//                                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                                
+                                Text(flashcards[currentFlashcard].answer)
+                                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                                
+                         
                             }
                         })
                     
@@ -116,35 +116,32 @@ struct ViewFlashcardScreen: View {
                                 
             }
             .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.navigation) {
+                ToolbarItem(placement: ToolbarItemPlacement.automatic) {
                 
-                    Button {
+                    Button("Done") {
                     presentationMode.wrappedValue.dismiss()
                     
-                    } label: {
-                        Image(systemName: "arrow.left")
-                            .foregroundColor(.red)
                     }
-                
+                    .foregroundColor(.blue)
             
                 }
-            
+               
                 }
+            
         }
         
             
         
     
     
-    
-    
+
 }
 
 
 
 struct ViewFlashcardScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ViewFlashcardScreen(flashcards: .constant([Flashcard(question: "", answer: "")]), dismiss: {})
+        ViewFlashcardScreen(flashcards: [Flashcard(question: "", answer: "")])
     }
 }
 
