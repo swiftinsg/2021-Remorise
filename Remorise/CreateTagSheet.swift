@@ -25,7 +25,8 @@ class TextFieldManager: ObservableObject {
 
 struct CreateTagSheet: View {
     
-    @Environment(\.presentationMode) var presentationMode
+    var dismiss: (String?) -> Void
+    //@Environment(\.presentationMode) var presentationMode
     @ObservedObject var textFieldManager = TextFieldManager()
     
     
@@ -55,20 +56,20 @@ struct CreateTagSheet: View {
             }
             
             .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.navigation) {
+                ToolbarItem(placement: .navigation) {
                     
                     Button("Cancel") {
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss(nil)
                     }
                     .foregroundColor(.red)
                     
                     
                 }
                 
-                ToolbarItem(placement: ToolbarItemPlacement.automatic) {
+                ToolbarItem(placement: .automatic) {
                     
                     Button("Done") {
-                        
+                        dismiss(textFieldManager.userInput)
                         
                     }
                 }
@@ -80,6 +81,6 @@ struct CreateTagSheet: View {
 
 struct CreateTagSheet_Previews: PreviewProvider {
     static var previews: some View {
-        CreateTagSheet()
+        CreateTagSheet(dismiss: { _ in })
     }
 }

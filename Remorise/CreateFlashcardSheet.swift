@@ -15,13 +15,13 @@ struct CreateFlashcardSheet: View
     @State private var showFlashcardSheet = false
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var flashcardManager: FlashcardManager
-   
+    
     
     var body: some View
     {
         NavigationView
         {
-    
+            
             VStack(alignment: .leading)
             {
                 
@@ -58,16 +58,16 @@ struct CreateFlashcardSheet: View
                     ToolbarItem(placement: .navigationBarTrailing)
                     {
                         
-//                        Button("Next") {
-//                            presentationMode.wrappedValue.dismiss()
-//                        }
+                        //                        Button("Next") {
+                        //                            presentationMode.wrappedValue.dismiss()
+                        //                        }
                         
-//                            destination: CreateFlashcardScreen(flashcards: $flashcardStack.flashcards).navigationBarHidden(true),
-                           Button("Next")  {
-                              
-                               showFlashcardSheet = true
-                               
-                            }
+                        //                            destination: CreateFlashcardScreen(flashcards: $flashcardStack.flashcards).navigationBarHidden(true),
+                        Button("Next")  {
+                            
+                            showFlashcardSheet = true
+                            
+                        }
                     }
                 }
                 
@@ -100,10 +100,10 @@ struct CreateFlashcardSheet: View
                     
                     ForEach (flashcardStack.flashcardTags, id: \.self) { tag in
                         Text("#\(tag)")
-                                .foregroundColor(Color("Oxford Blue"))
-                                .font(.system(size: 15))
-                                .padding()
-                                .background(Color.blue)
+                            .foregroundColor(Color("Oxford Blue"))
+                            .font(.system(size: 15))
+                            .padding()
+                            .background(Color.blue)
                             .cornerRadius(30)
                         
                         
@@ -117,13 +117,16 @@ struct CreateFlashcardSheet: View
             
         }
         .sheet(isPresented: $showTagSheet, content: {
-            CreateTagSheet()
+            CreateTagSheet(dismiss: { newTag in
+                            showTagSheet = false
+                
+            })
         })
         .fullScreenCover(isPresented: $showFlashcardSheet, content: {
             CreateFlashcardScreen(flashcards: $flashcardStack.flashcards) { shouldSave in
                 showFlashcardSheet = false
                 if shouldSave {
-                flashcardManager.flashcardStacks.append(flashcardStack)
+                    flashcardManager.flashcardStacks.append(flashcardStack)
                 }
                 presentationMode.wrappedValue.dismiss()
             }
@@ -131,49 +134,49 @@ struct CreateFlashcardSheet: View
         })
         
     }
-        
+}
+
+struct CustomsTextEditor: View {
     
-    struct CustomsTextEditor: View {
+    let placeholder: String
+    @Binding var text: String
+    let internalPadding: CGFloat = 5
+    
+    var body: some View {
         
-        let placeholder: String
-        @Binding var text: String
-        let internalPadding: CGFloat = 5
-        
-        var body: some View {
-            
-            ZStack(alignment: .center) {
-                if text.isEmpty {
-                    Text(placeholder)
-                        .foregroundColor(Color.primary.opacity(0.25))
-                        .fontWeight(.bold)
-                        .font(.system(size: 25))
-                        .accentColor(.green)
+        ZStack(alignment: .center) {
+            if text.isEmpty {
+                Text(placeholder)
+                    .foregroundColor(Color.primary.opacity(0.25))
+                    .fontWeight(.bold)
+                    .font(.system(size: 25))
+                    .accentColor(.green)
                     
                     
-                        .padding(internalPadding)
-                    
-                    
-                }
-                TextEditor(text: $text)
-                    .frame(minHeight: 30)
-                    .fixedSize(horizontal: false, vertical: true)
                     .padding(internalPadding)
                 
                 
-            }.onAppear() {
-                UITextView.appearance().backgroundColor = UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 0)
-                
-            }.onDisappear() {
-                UITextView.appearance().backgroundColor = UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)
             }
-        }
-    }
-    
-    struct CreateFlashcardSheet_Previews: PreviewProvider
-    {
-        static var previews: some View
-        {
-            CreateFlashcardSheet().environmentObject(FlashcardManager())
+            TextEditor(text: $text)
+                .frame(minHeight: 30)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(internalPadding)
+            
+            
+        }.onAppear() {
+            UITextView.appearance().backgroundColor = UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 0)
+            
+        }.onDisappear() {
+            UITextView.appearance().backgroundColor = UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)
         }
     }
 }
+
+struct CreateFlashcardSheet_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
+        CreateFlashcardSheet().environmentObject(FlashcardManager())
+    }
+}
+
