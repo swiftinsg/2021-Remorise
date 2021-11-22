@@ -8,30 +8,24 @@
 import SwiftUI
 import Foundation
 
-//enum BlueColor: Codable {
-//   case lightBlue
-//   case blue2
-//   case darkBlue
-//}
-//
-//
-//extension BlueColor {
-//    var value: UIColor {
-//        get {
-//            switch self {
-//            case .lightBlue:
-//                return UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)
-//            case .blue2:
-//                return UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1)
-//            case .darkBlue:
-//                return UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1)
-//
-//
-//            }
-//        }
-//    }
-//}
-//
+enum MyColor: Codable {
+   case lightBlue
+   case blue2
+   case darkBlue
+}
+
+func getColor(color: MyColor) -> Color {
+    switch color {
+    case .lightBlue:
+        return Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1))
+    case .blue2:
+        return Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1))
+    case .darkBlue:
+        return Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1))
+
+    }
+}
+
 
 
 
@@ -43,6 +37,8 @@ struct CreateFlashcardScreen: View {
     @State private var showingDiscardFlashcardAlert = false
     @State var flipped = false
     @State private var showHomeScreen = false
+    @Binding var color: MyColor
+
     var dismiss: (Bool) -> Void
     
     var body: some View {
@@ -72,8 +68,7 @@ struct CreateFlashcardScreen: View {
                     FlipFlashcard(flipped: $flipped, front: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 25, style: .continuous)
-                            // .fill(BlueColor.lightBlue.value)
-                                .fill(Color("Beau Blue"))
+                                .fill(getColor(color: color))
                                 .frame(height: 220)
 
                             CustomTextEditor(placeholder: "Type question here...", bold: true, text: $flashcards[currentFlashcard].question)
@@ -81,7 +76,7 @@ struct CreateFlashcardScreen: View {
                     }, back: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                .fill(Color("Beau Blue"))
+                                .fill(getColor(color: color))
                                 .frame(height: 220)
                             CustomTextEditor(placeholder: "Type answer here...", bold: false, text: $flashcards[currentFlashcard].answer)
                         }
@@ -178,26 +173,35 @@ struct CreateFlashcardScreen: View {
                 .padding(.bottom, 1)
                 HStack(spacing: 30) {
                     Button(action: {
+                        color = .lightBlue
+
                         
                     }){
                         ZStack{
                             Circle()
+                                .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
                                 .frame(width: 20, height: 20)
                         }
                     }
                     Button(action: {
+                        color = .blue2
+
                         
                     }){
                         ZStack{
                             Circle()
+                                .fill(Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1)))
                                 .frame(width: 20, height: 20)
                         }
                     }
                     Button(action: {
+                        color = .darkBlue
+
                         
                     }){
                         ZStack{
                             Circle()
+                                .fill(Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1)))
                                 .frame(width: 20, height: 20)
                         }
                     }
@@ -286,8 +290,7 @@ struct CreateFlashcardScreen: View {
     
     struct CreateFlashcardScreen_Previews: PreviewProvider {
         static var previews: some View {
-            CreateFlashcardScreen(flashcards: .constant([Flashcard(question: "", answer: "")]), dismiss: {_ in })
-        }
+            CreateFlashcardScreen(flashcards: .constant([Flashcard(question: "", answer: "")]),color: .constant(.lightBlue),dismiss: {_ in })        }
     }
 }
 

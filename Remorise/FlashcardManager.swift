@@ -20,6 +20,8 @@ struct FlashcardStack: Codable, Identifiable, Equatable {
     var flashcardName: String
     var flashcardTags: [String]
     var id = UUID()
+    var myColor = MyColor.lightBlue
+
 }
 
 
