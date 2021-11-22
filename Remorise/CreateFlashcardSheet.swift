@@ -125,7 +125,7 @@ struct CreateFlashcardSheet: View
             })
         })
         .fullScreenCover(isPresented: $showFlashcardSheet, content: {
-            CreateFlashcardScreen(flashcards: $flashcardStack.flashcards) { shouldSave in
+            CreateFlashcardScreen(flashcards: $flashcardStack.flashcards, color: $flashcardStack.myColor) { shouldSave in
                 showFlashcardSheet = false
                 if shouldSave {
                     flashcardManager.flashcardStacks.append(flashcardStack)

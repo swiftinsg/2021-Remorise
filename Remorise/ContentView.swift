@@ -141,7 +141,15 @@ struct ContentView: View {
                                         Label("Edit", systemImage: "pencil")
                                     }
                                 } label: {
-                                    Image(systemName: "list.bullet")
+                                    ZStack{
+                                        Circle()
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(Color("Azure"))
+                                        Image(systemName: "list.bullet")
+                                            .foregroundColor(Color("Beau Blue"))
+
+                                    
+                                    }
                                 }
                                 .padding()
                             }
