@@ -198,7 +198,7 @@ struct ContentView: View {
             flashcardManager.saveFlashcards()
         }
         
-        .sheet(isPresented: $isFlashcardPresented) {
+        .fullScreenCover(isPresented: $isFlashcardPresented) {
             CreateFlashcardSheet()
                 .environmentObject(flashcardManager)
         }

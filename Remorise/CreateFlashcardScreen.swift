@@ -8,34 +8,6 @@
 import SwiftUI
 import Foundation
 
-//enum BlueColor: Codable {
-//   case lightBlue
-//   case blue2
-//   case darkBlue
-//}
-//
-//
-//extension BlueColor {
-//    var value: UIColor {
-//        get {
-//            switch self {
-//            case .lightBlue:
-//                return UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)
-//            case .blue2:
-//                return UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1)
-//            case .darkBlue:
-//                return UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1)
-//
-//
-//            }
-//        }
-//    }
-//}
-//
-
-
-
-
 struct CreateFlashcardScreen: View {
     @State private var currentFlashcard: Int = 0
     @Binding var flashcards: [Flashcard]
@@ -86,20 +58,6 @@ struct CreateFlashcardScreen: View {
                                 CustomTextEditor(placeholder: "Type answer here...", bold: false, text: $flashcards[currentFlashcard].answer)
                             }
                         })
-                    
-                    
-                    
-//                    ZStack(alignment: .topLeading) {
-//                        RoundedRectangle(cornerRadius: 25, style: .continuous)
-//                            .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
-//                            .frame(height: 220)
-//                        CustomTextEditor(placeholder: "Type question here...", text: $flashcards[currentFlashcard].question)
-//                            .font(.system(.body, design: .rounded))
-//                            .multilineTextAlignment(TextAlignment.center)
-//                            .frame(height: 220)
-//                    }
-                    
-                    
                     
                     if currentFlashcard != flashcards.count - 1 {
                         Button {

@@ -12,7 +12,7 @@ class TextFieldManager: ObservableObject {
     let characterLimit = 9
     
     @Published var userInput = "" {
-        
+    
         didSet {
             
             if userInput.count > characterLimit {

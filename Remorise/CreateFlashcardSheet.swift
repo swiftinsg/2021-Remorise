@@ -10,8 +10,8 @@ import Foundation
 struct CreateFlashcardSheet: View
 {
     
-    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [])
-    @State private var showTagSheet = false
+    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""]) //change made here [] -> [""]
+    @State private var showTagSheet = true
     @State private var showFlashcardSheet = false
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var flashcardManager: FlashcardManager
@@ -118,6 +118,8 @@ struct CreateFlashcardSheet: View
         }
         .sheet(isPresented: $showTagSheet, content: {
             CreateTagSheet(dismiss: { newTag in
+                if let newUnWrappedTag = newTag { flashcardStack.flashcardTags.append(newUnWrappedTag)}
+                
                             showTagSheet = false
                 
             })
