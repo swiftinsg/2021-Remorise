@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Flashcard: Codable, Identifiable, Equatable {
-    var question: String = "What is the capital of Rome?"
+    var question: String 
     var answer: String
     var id = UUID()
 }

@@ -72,7 +72,7 @@ struct CreateFlashcardScreen: View {
                     FlipFlashcard(flipped: $flipped, front: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
-                                   // .fill(BlueColor.lightBlue.value)
+                                   .fill(Color("Beau Blue"))
                                     .frame(height: 220)
                                 CustomTextEditor(placeholder: "Type question here...", bold: true, text: $flashcards[currentFlashcard].question)
                             }
@@ -81,6 +81,8 @@ struct CreateFlashcardScreen: View {
                                 RoundedRectangle(cornerRadius: 25, style: .continuous)
                                     .fill(Color("Beau Blue"))
                                     .frame(height: 220)
+                                
+                                
                                 CustomTextEditor(placeholder: "Type answer here...", bold: false, text: $flashcards[currentFlashcard].answer)
                             }
                         })
