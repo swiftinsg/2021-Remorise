@@ -12,6 +12,7 @@ struct Flashcard: Codable, Identifiable, Equatable {
     var question: String 
     var answer: String
     var id = UUID()
+   
 }
 
 struct FlashcardStack: Codable, Identifiable, Equatable {

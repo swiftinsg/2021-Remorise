@@ -9,16 +9,22 @@ import SwiftUI
 
 struct EditStackScreen: View {
     @ObservedObject var textFieldManager = TextFieldManager()
+    @ObservedObject private var flashcardManager = FlashcardManager()
+    @State private var currentFlashcard: Int = 0
+    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [])
+    var flashcards: [Flashcard]
+    
     
     var body: some View {
         
         
         NavigationView {
             
+            ForEach(flashcardManager.flashcardStacks) { stack in
             VStack {
                 
                 
-                TextField("Stack name", text: $textFieldManager.userInput)
+                TextField(stack.flashcardName, text: $flashcardStack.flashcardName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .font(.system(size: 24.0, weight: .bold,design: .rounded))
                     .lineLimit(1)
@@ -63,65 +69,23 @@ struct EditStackScreen: View {
                 
                 
                 ScrollView {
-                    VStack {
-                        Button("What is the capital of Italy?") {
+                    ForEach(flashcardManager.flashcardStacks)  { stack in
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 25, style: .continuous)
+                                .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                                .frame(width: 350, height: 220)
                             
-                        }
-                        .padding()
-                        .font(.system(size: 35.0, weight: .bold,design: .rounded))
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .multilineTextAlignment(.center)
-                        .cornerRadius(15)
-                        .navigationTitle("Edit Stack")
-                        .navigationBarTitleDisplayMode(.inline)
-                        
-                        Button("What is the capital of Italy?") {
                             
-                        }
-                        .padding()
-                        .font(.system(size: 35.0, weight: .bold,design: .rounded))
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .multilineTextAlignment(.center)
-                        .cornerRadius(15)
-                        .navigationTitle("Edit Stack")
-                        
-                        Button("What is the capital of Italy?") {
+                            Text(flashcards[currentFlashcard].question)
+                                .font(.system(size: 20, weight: .bold, design: .rounded))
                             
+                     
                         }
-                        .padding()
-                        .font(.system(size: 35.0, weight: .bold,design: .rounded))
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .multilineTextAlignment(.center)
-                        .cornerRadius(15)
-                        .navigationTitle("Edit Stack")
-                        
-                        Button("What is the capital of Italy?") {
-                            
-                        }
-                        .padding()
-                        .font(.system(size: 35.0, weight: .bold,design: .rounded))
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .multilineTextAlignment(.center)
-                        .cornerRadius(15)
-                        .navigationTitle("Edit Stack")
-                        Button("What is the capital of Italy?") {
-                            
-                        }
-                        .padding()
-                        .font(.system(size: 35.0, weight: .bold,design: .rounded))
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .multilineTextAlignment(.center)
-                        .cornerRadius(15)
-                        .navigationTitle("Edit Stack")
                     }
                 }
                 
             }
+        }
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.navigation) {
                     
@@ -148,6 +112,7 @@ struct EditStackScreen: View {
 
 struct EditStackScreen_Previews: PreviewProvider {
     static var previews: some View {
-        EditStackScreen()
+        EditStackScreen(flashcards: [Flashcard(question: "", answer: "")])
     }
 }
+

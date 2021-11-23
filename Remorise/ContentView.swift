@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var showActiveRecallScreen = false
     @ObservedObject private var flashcardManager = FlashcardManager()
     @State private var isFlashcardPresented = false
+    @State private var currentlyEditedStack: FlashcardStack? = nil
    
 //    @State private var currentFlashcard: Int = 0
     @State private var currentlySelectedStack: FlashcardStack? = nil
@@ -136,7 +137,7 @@ struct ContentView: View {
                                         Label("Review", systemImage: "book.fill")
                                     }
                                     Button(action: {
-                                        
+                                        currentlyEditedStack = stack
                                     }) {
                                         Label("Edit", systemImage: "pencil")
                                     }
@@ -216,6 +217,10 @@ struct ContentView: View {
         
         .fullScreenCover(item: $currentlySelectedStack ) { i in
             ViewFlashcardScreen(flashcards: i.flashcards)
+        }
+        
+        .fullScreenCover(item: $currentlyEditedStack ) { i in
+            EditStackScreen(flashcards: i.flashcards)
         }
 //        
         

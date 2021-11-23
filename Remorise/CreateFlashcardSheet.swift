@@ -1,9 +1,3 @@
-//
-//  CreateFlashcardSheet.swift
-//  Remorise
-//
-//  Created by Wenyue on 15/11/21.
-//
 import SwiftUI
 import Foundation
 
@@ -118,14 +112,13 @@ struct CreateFlashcardSheet: View
         }
         .sheet(isPresented: $showTagSheet, content: {
             CreateTagSheet(dismiss: { newTag in
-                if let newUnWrappedTag = newTag { flashcardStack.flashcardTags.append(newUnWrappedTag)}
-                
                             showTagSheet = false
                 
             })
         })
         .fullScreenCover(isPresented: $showFlashcardSheet, content: {
-            CreateFlashcardScreen(flashcards: $flashcardStack.flashcards, color: $flashcardStack.myColor) { shouldSave in
+            CreateFlashcardScreen(flashcards: $flashcardStack.flashcards, color:
+                $flashcardStack.myColor) { shouldSave in
                 showFlashcardSheet = false
                 if shouldSave {
                     flashcardManager.flashcardStacks.append(flashcardStack)
@@ -181,4 +174,3 @@ struct CreateFlashcardSheet_Previews: PreviewProvider
         CreateFlashcardSheet().environmentObject(FlashcardManager())
     }
 }
-

@@ -1,10 +1,3 @@
-//
-//  CreateFlashcardScreen.swift
-//  RemBasicCode
-//
-//  Created by Trinity Lee on 19/11/21.
-//
-
 import SwiftUI
 import Foundation
 
