@@ -9,12 +9,13 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""])
     @State private var showActiveRecallScreen = false
     @ObservedObject private var flashcardManager = FlashcardManager()
     @State private var isFlashcardPresented = false
     @State private var currentlyEditedStack: FlashcardStack? = nil
-   
-//    @State private var currentFlashcard: Int = 0
+    
+    //    @State private var currentFlashcard: Int = 0
     @State private var currentlySelectedStack: FlashcardStack? = nil
     
     
@@ -41,7 +42,7 @@ struct ContentView: View {
                     isFlashcardPresented = true
                     
                 }
-            label:
+                label:
                 {
                     Image(systemName: "plus")
                         .foregroundColor(Color("Oxford Blue"))
@@ -82,31 +83,17 @@ struct ContentView: View {
                         
                     } label:
                     {
-                        Text("#science")
-                            .foregroundColor(Color("Oxford Blue"))
-                            .font(.system(size: 20))
-                        
+                        ForEach (flashcardStack.flashcardTags, id: \.self) { tag in
+                            Text("#\(tag)")
+                                .foregroundColor(Color("Oxford Blue"))
+                                .font(.system(size: 15, weight: .regular, design: .rounded))
+                                .padding(15)
+                                .background(Color("ButtonStack Color"))
+                                .cornerRadius(30)
+                            
+                        }
                     }
                     .padding()
-                    .frame(alignment: .leading)
-                    .background(Color("Beau Blue"))
-                    .cornerRadius(30)
-                    
-                    
-                    Button
-                    {
-                        
-                    } label:
-                    {
-                        Text("#geography")
-                            .foregroundColor(Color("Oxford Blue"))
-                            .font(.system(size: 20))
-                        
-                    }
-                    .padding()
-                    .frame(alignment: .leading)
-                    .background(Color("Beau Blue"))
-                    .cornerRadius(30)
                 }
             }
             .padding(.horizontal)
@@ -148,8 +135,7 @@ struct ContentView: View {
                                             .foregroundColor(Color("Azure"))
                                         Image(systemName: "list.bullet")
                                             .foregroundColor(Color("Beau Blue"))
-
-                                    
+                                        
                                     }
                                 }
                                 .padding()
@@ -175,8 +161,6 @@ struct ContentView: View {
                                             .padding(15)
                                             .background(Color("ButtonStack Color"))
                                             .cornerRadius(30)
-                                        
-                                        
                                     }
                                 }
                                 
@@ -222,16 +206,12 @@ struct ContentView: View {
         .fullScreenCover(item: $currentlyEditedStack ) { i in
             EditStackScreen(flashcards: i.flashcards)
         }
-//        
+        //
         
     } // Vstack
 } // body View
-
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
-
