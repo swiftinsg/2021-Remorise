@@ -8,7 +8,7 @@
 import SwiftUI
 import Foundation
 
-enum MyColor: Codable {
+enum MyColor: Int, Codable {
    case lightBlue
    case blue2
    case darkBlue
