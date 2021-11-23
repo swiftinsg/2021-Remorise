@@ -77,6 +77,7 @@ struct ViewFlashcardScreen: View {
                             Image(systemName:"arrow.right")
                                 .padding(.trailing)
                                 .foregroundColor(.black)
+                                .opacity(flashcards.count != 1 ? 1 : 0)
                         }
                     
                 } //end of HStack

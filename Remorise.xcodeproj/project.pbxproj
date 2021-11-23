@@ -119,11 +119,11 @@
 				992935AA2746926000745887 /* CreateTagSheet.swift */,
 				992935AC2748146900745887 /* EditStackScreen.swift */,
 				998885D3274A0E47004620E1 /* ViewFlashcardScreen.swift */,
+				992935A827460C7300745887 /* FlashcardManager.swift */,
+				998885D7274D2911004620E1 /* EditFlashcardScreen.swift */,
 				97F05B3E2741258800DC29FF /* Assets.xcassets */,
 				97F05B432741258800DC29FF /* Info.plist */,
 				97F05B402741258800DC29FF /* Preview Content */,
-				992935A827460C7300745887 /* FlashcardManager.swift */,
-				998885D7274D2911004620E1 /* EditFlashcardScreen.swift */,
 			);
 			path = Remorise;
 			sourceTree = "<group>";
