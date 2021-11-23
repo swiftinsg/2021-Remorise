@@ -137,6 +137,7 @@ struct ContentView: View {
                                         Label("Review", systemImage: "book.fill")
                                     }
                                     Button(action: {
+                                        
                                         currentlyEditedStack = stack
                                     }) {
                                         Label("Edit", systemImage: "pencil")
