@@ -112,6 +112,8 @@ struct CreateFlashcardSheet: View
         }
         .sheet(isPresented: $showTagSheet, content: {
             CreateTagSheet(dismiss: { newTag in
+                if let newUnWrappedTag = newTag { flashcardStack.flashcardTags.append(newUnWrappedTag)}
+                
                             showTagSheet = false
                 
             })

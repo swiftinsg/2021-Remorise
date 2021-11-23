@@ -70,6 +70,7 @@ struct CreateTagSheet: View {
                     
                     Button("Done") {
                         dismiss(textFieldManager.userInput)
+                        //fix this part (if the append in the tag sheet doesn't work)
                         
                     }
                 }
