@@ -96,14 +96,16 @@ struct EditFlashcardScreen: View {
                         }
                     } label: {
                         ZStack{
+                            
                             Capsule()
                                 .fill(Color(UIColor(red: 136/255, green: 131/255, blue: 131/255, alpha: 0.17)))
-                                .frame(width: 100, height: 30)
+                                .frame(width: 100, height: 45)
                             HStack{
                                 Text("Flip")
                                 Image(systemName:"rectangle.on.rectangle.angled")
                             }
                         }
+                        .padding()
                         
                     }
                     Button {
@@ -112,6 +114,7 @@ struct EditFlashcardScreen: View {
                         Image(systemName:"minus.circle.fill")
                             .padding(.trailing)
                             .foregroundColor(.red)
+                            .font(.system(size: 30))
                     }
                     .alert(isPresented: $showingDiscardFlashcardAlert) {
                         Alert(
@@ -148,7 +151,7 @@ struct EditFlashcardScreen: View {
                         ZStack{
                             Circle()
                                 .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
-                                .frame(width: 20, height: 20)
+                                .frame(width: 30, height: 30)
                         }
                     }
                     Button(action: {
@@ -159,7 +162,7 @@ struct EditFlashcardScreen: View {
                         ZStack{
                             Circle()
                                 .fill(Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1)))
-                                .frame(width: 20, height: 20)
+                                .frame(width: 30, height: 30)
                         }
                     }
                     Button(action: {
@@ -170,7 +173,7 @@ struct EditFlashcardScreen: View {
                         ZStack{
                             Circle()
                                 .fill(Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1)))
-                                .frame(width: 20, height: 20)
+                                .frame(width: 30, height: 30)
                         }
                     }
                     
