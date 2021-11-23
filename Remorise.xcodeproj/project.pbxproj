@@ -19,6 +19,7 @@
 		992935AB2746926000745887 /* CreateTagSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992935AA2746926000745887 /* CreateTagSheet.swift */; };
 		992935AD2748146900745887 /* EditStackScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992935AC2748146900745887 /* EditStackScreen.swift */; };
 		998885D4274A0E47004620E1 /* ViewFlashcardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998885D3274A0E47004620E1 /* ViewFlashcardScreen.swift */; };
+		998885D8274D2911004620E1 /* EditFlashcardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998885D7274D2911004620E1 /* EditFlashcardScreen.swift */; };
 		E7A7E9652745DC9B00CBFB4F /* CreateFlashcardSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7E9642745DC9B00CBFB4F /* CreateFlashcardSheet.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		992935AA2746926000745887 /* CreateTagSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTagSheet.swift; sourceTree = "<group>"; };
 		992935AC2748146900745887 /* EditStackScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStackScreen.swift; sourceTree = "<group>"; };
 		998885D3274A0E47004620E1 /* ViewFlashcardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFlashcardScreen.swift; sourceTree = "<group>"; };
+		998885D7274D2911004620E1 /* EditFlashcardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFlashcardScreen.swift; sourceTree = "<group>"; };
 		E7A7E9642745DC9B00CBFB4F /* CreateFlashcardSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFlashcardSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +123,7 @@
 				97F05B432741258800DC29FF /* Info.plist */,
 				97F05B402741258800DC29FF /* Preview Content */,
 				992935A827460C7300745887 /* FlashcardManager.swift */,
+				998885D7274D2911004620E1 /* EditFlashcardScreen.swift */,
 			);
 			path = Remorise;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				998885D8274D2911004620E1 /* EditFlashcardScreen.swift in Sources */,
 				97F05B3D2741257A00DC29FF /* ContentView.swift in Sources */,
 				97F05B3B2741257A00DC29FF /* RemoriseApp.swift in Sources */,
 				2EF3A46227481D2E00FEE2FB /* ActiveRecallScreen.swift in Sources */,

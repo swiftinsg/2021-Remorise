@@ -221,10 +221,10 @@ struct ContentView: View {
         }
         
         .fullScreenCover(item: $currentlyEditedStack ) { i in
-            EditStackScreen(flashcards: i.flashcards)
+            EditStackScreen(flashcards: i.flashcards, dismiss: {_ in })
         }
 //        
-        
+       
     } // Vstack
 } // body View
 
