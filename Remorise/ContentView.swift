@@ -35,7 +35,6 @@ struct ContentView: View {
         return flashcardManager.flashcardStacks
     }
     
-
     var body: some View {
         VStack {
             
@@ -229,7 +228,7 @@ struct ContentView: View {
         }
         
         .fullScreenCover(item: $currentlyEditedStack ) { i in
-            EditStackScreen(flashcards: i.flashcards)
+            EditStackScreen(flashcards: i.flashcards, dismiss: {_ in })
         }
         //
         
