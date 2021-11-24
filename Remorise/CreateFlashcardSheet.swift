@@ -1,10 +1,8 @@
 import SwiftUI
 import Foundation
 
-struct CreateFlashcardSheet: View
-{
-    
-    @State private var flashcardStacks = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""]) //change made here [] -> [""]
+struct CreateFlashcardSheet: View {
+    @State private var flashcardStacks = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [])
     @State private var showTagSheet = true
     @State private var showFlashcardSheet = false
     @Environment(\.presentationMode) var presentationMode
@@ -76,33 +74,34 @@ struct CreateFlashcardSheet: View
                 }
                 .frame(height: 240)
                 
-                HStack(spacing: 10)
-                {
-                    Button {
-                        showTagSheet = true
+                HStack(spacing: 10) {
+                    ScrollView(.horizontal) {
+                        Button {
+                            showTagSheet = true
+                            
+                        } label:
+                        {
+                            Image(systemName: "plus")
+                                .foregroundColor(Color("Oxford Blue"))
+                                .font(.system(size: 30))
+                        }
+                        .padding()
+                        .frame(width: 40, height: 40)
+                        .background(Color("Beau Blue"))
+                        .clipShape(Circle())
                         
-                    } label:
-                    {
-                        Image(systemName: "plus")
-                            .foregroundColor(Color("Oxford Blue"))
-                            .font(.system(size: 30))
+                        ForEach (flashcardStacks.flashcardTags, id: \.self) { tag in
+                            Text("#\(tag)")
+                                .foregroundColor(Color("Oxford Blue"))
+                                .font(.system(size: 15))
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(30)
+                            
+                            
+                        }
                     }
-                    .padding()
-                    .frame(width: 40, height: 40)
-                    .background(Color("Beau Blue"))
-                    .clipShape(Circle())
-                    
-                    ForEach (flashcardStacks.flashcardTags, id: \.self) { tag in
-                        Text("#\(tag)")
-                            .foregroundColor(Color("Oxford Blue"))
-                            .font(.system(size: 15))
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(30)
-                        
-                        
-                    }
-                }
+                } //end of HStack
                 .padding()
                 .frame(height: 10)
                 
@@ -114,13 +113,13 @@ struct CreateFlashcardSheet: View
             CreateTagSheet(dismiss: { newTag in
                 if let newUnWrappedTag = newTag { flashcardStacks.flashcardTags.append(newUnWrappedTag)}
                 
-                            showTagSheet = false
+                showTagSheet = false
                 
             })
         })
         .fullScreenCover(isPresented: $showFlashcardSheet, content: {
             CreateFlashcardScreen(flashcards: $flashcardStacks.flashcards, color:
-                $flashcardStacks.myColor) { shouldSave in
+                                    $flashcardStacks.myColor) { shouldSave in
                 showFlashcardSheet = false
                 if shouldSave {
                     flashcardManager.flashcardStacks.append(flashcardStacks)

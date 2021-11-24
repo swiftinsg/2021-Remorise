@@ -73,11 +73,10 @@ struct ContentView: View {
                 .clipShape(Circle())
                 
             } // HStack
-            // button cannot alignment leading pls help
             
             ScrollView(.horizontal)
             {
-                HStack(spacing:9)
+                HStack(spacing: 10)
                 {
                     Button
                     {
@@ -199,10 +198,11 @@ struct ContentView: View {
                     }
                 }
             } else {
-                VStack{
+                VStack {
                 Text("No flashcard stack created yet")
                 Text("Click the '+' button to get started")
                 }
+                .padding(.top, 150)
             }
             Spacer()
         }
