@@ -9,7 +9,7 @@ import SwiftUI
 
 class TextFieldManager: ObservableObject {
     
-    let characterLimit = 9
+    let characterLimit = 50
     
     @Published var userInput = "" {
     

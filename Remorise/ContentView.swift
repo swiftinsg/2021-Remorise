@@ -9,7 +9,6 @@ import SwiftUI
 
 
 struct ContentView: View {
-    //@State private var flashcardStacks: [FlashcardStack] = [FlashcardStack]
     @State private var showActiveRecallScreen = false
     @ObservedObject private var flashcardManager = FlashcardManager()
     @State private var isFlashcardPresented = false
@@ -100,14 +99,13 @@ struct ContentView: View {
                         } label: {
                                 Text("#\(tag)")
                                     .foregroundColor(Color("Oxford Blue"))
-                                    .font(.system(size: 15, weight: .regular, design: .rounded))
+                                    .font(.system(size: 20, weight: .regular, design: .rounded))
                                     .padding(15)
                                     .background(Color("ButtonStack Color"))
                                     .cornerRadius(30)
                         }
                                
                     }
-                    .padding()
                 }
             }
             .padding(.horizontal)
@@ -169,14 +167,16 @@ struct ContentView: View {
                                     
                                     
                                     
-                                    HStack {
-                                        ForEach (stack.flashcardTags, id: \.self) { tag in
-                                            Text("#\(tag)")
-                                                .foregroundColor(Color("Oxford Blue"))
-                                                .font(.system(size: 15, weight: .regular, design: .rounded))
-                                                .padding(15)
-                                                .background(Color("ButtonStack Color"))
-                                                .cornerRadius(30)
+                                    ScrollView(.horizontal) {
+                                        HStack {
+                                            ForEach (stack.flashcardTags, id: \.self) { tag in
+                                                Text("#\(tag)")
+                                                    .foregroundColor(Color("Oxford Blue"))
+                                                    .font(.system(size: 15, weight: .regular, design: .rounded))
+                                                    .padding(15)
+                                                    .background(Color("ButtonStack Color"))
+                                                    .cornerRadius(30)
+                                            }
                                         }
                                     }
                                     

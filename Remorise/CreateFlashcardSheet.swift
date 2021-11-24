@@ -49,12 +49,7 @@ struct CreateFlashcardSheet: View {
                     
                     ToolbarItem(placement: .navigationBarTrailing)
                     {
-                        
-                        //                        Button("Next") {
-                        //                            presentationMode.wrappedValue.dismiss()
-                        //                        }
-                        
-                        //                            destination: CreateFlashcardScreen(flashcards: $flashcardStack.flashcards).navigationBarHidden(true),
+                       
                         Button("Next")  {
                             
                             showFlashcardSheet = true
@@ -71,39 +66,43 @@ struct CreateFlashcardSheet: View {
                     
                     CustomsTextEditor.init(placeholder:"Name of Stack", text: $flashcardStacks.flashcardName)
                         .multilineTextAlignment(TextAlignment.center)
+                        .font(.system(size: 25, weight: .bold))
+                        
                 }
                 .frame(height: 240)
+            
                 
-                HStack(spacing: 10) {
-                    ScrollView(.horizontal) {
-                        Button {
-                            showTagSheet = true
+                ScrollView(.horizontal) {
+                    HStack(spacing: 10) {
+                            Button {
+                                showTagSheet = true
+                                
+                            } label:
+                            {
+                                Image(systemName: "plus")
+                                    .foregroundColor(Color("Oxford Blue"))
+                                    .font(.system(size: 30))
+                            }
+                            .padding()
+                            .frame(width: 40, height: 40)
+                            .background(Color("Beau Blue"))
+                            .clipShape(Circle())
                             
-                        } label:
-                        {
-                            Image(systemName: "plus")
-                                .foregroundColor(Color("Oxford Blue"))
-                                .font(.system(size: 30))
-                        }
-                        .padding()
-                        .frame(width: 40, height: 40)
-                        .background(Color("Beau Blue"))
-                        .clipShape(Circle())
+                            ForEach (flashcardStacks.flashcardTags, id: \.self) { tag in
+                                Text("#\(tag)")
+                                    .foregroundColor(Color("Oxford Blue"))
+                                    .font(.system(size: 15))
+                                    .padding()
+                                    .background(Color.blue)
+                                    .cornerRadius(30)
+                                
+                                
+                            }
                         
-                        ForEach (flashcardStacks.flashcardTags, id: \.self) { tag in
-                            Text("#\(tag)")
-                                .foregroundColor(Color("Oxford Blue"))
-                                .font(.system(size: 15))
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(30)
-                            
-                            
-                        }
-                    }
-                } //end of HStack
+                    } //end of HStack
+                 //   .padding()
+                }
                 .padding()
-                .frame(height: 10)
                 
                 Spacer()
             }
