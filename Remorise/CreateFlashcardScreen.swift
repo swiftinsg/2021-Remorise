@@ -22,7 +22,6 @@ func getColor(color: MyColor) -> Color {
 
 
 
-
 struct CreateFlashcardScreen: View {
     @State private var currentFlashcard: Int = 0
     @Binding var flashcards: [Flashcard]
