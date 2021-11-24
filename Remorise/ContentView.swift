@@ -227,11 +227,6 @@ struct ContentView: View {
             ViewFlashcardScreen(flashcards: i.flashcards)
         }
         
-        .fullScreenCover(item: $currentlyEditedStack ) { i in
-            EditStackScreen(flashcards: i.flashcards, dismiss: {_ in })
-        }
-        //
-        
     } // Vstack
 } // body View
 struct ContentView_Previews: PreviewProvider {

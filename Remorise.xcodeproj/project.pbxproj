@@ -17,7 +17,6 @@
 		97F4AEE72744F797000D4EC1 /* CreateFlashcardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F4AEE62744F797000D4EC1 /* CreateFlashcardScreen.swift */; };
 		992935A927460C7300745887 /* FlashcardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992935A827460C7300745887 /* FlashcardManager.swift */; };
 		992935AB2746926000745887 /* CreateTagSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992935AA2746926000745887 /* CreateTagSheet.swift */; };
-		992935AD2748146900745887 /* EditStackScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992935AC2748146900745887 /* EditStackScreen.swift */; };
 		998885D4274A0E47004620E1 /* ViewFlashcardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998885D3274A0E47004620E1 /* ViewFlashcardScreen.swift */; };
 		998885D8274D2911004620E1 /* EditFlashcardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998885D7274D2911004620E1 /* EditFlashcardScreen.swift */; };
 		E7A7E9652745DC9B00CBFB4F /* CreateFlashcardSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7E9642745DC9B00CBFB4F /* CreateFlashcardSheet.swift */; };
@@ -57,7 +56,6 @@
 		97F4AEE62744F797000D4EC1 /* CreateFlashcardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFlashcardScreen.swift; sourceTree = "<group>"; };
 		992935A827460C7300745887 /* FlashcardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardManager.swift; sourceTree = "<group>"; };
 		992935AA2746926000745887 /* CreateTagSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTagSheet.swift; sourceTree = "<group>"; };
-		992935AC2748146900745887 /* EditStackScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStackScreen.swift; sourceTree = "<group>"; };
 		998885D3274A0E47004620E1 /* ViewFlashcardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFlashcardScreen.swift; sourceTree = "<group>"; };
 		998885D7274D2911004620E1 /* EditFlashcardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFlashcardScreen.swift; sourceTree = "<group>"; };
 		E7A7E9642745DC9B00CBFB4F /* CreateFlashcardSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFlashcardSheet.swift; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 				97F4AEE62744F797000D4EC1 /* CreateFlashcardScreen.swift */,
 				E7A7E9642745DC9B00CBFB4F /* CreateFlashcardSheet.swift */,
 				992935AA2746926000745887 /* CreateTagSheet.swift */,
-				992935AC2748146900745887 /* EditStackScreen.swift */,
 				998885D3274A0E47004620E1 /* ViewFlashcardScreen.swift */,
 				992935A827460C7300745887 /* FlashcardManager.swift */,
 				998885D7274D2911004620E1 /* EditFlashcardScreen.swift */,
@@ -288,7 +285,6 @@
 				97F05B3B2741257A00DC29FF /* RemoriseApp.swift in Sources */,
 				2EF3A46227481D2E00FEE2FB /* ActiveRecallScreen.swift in Sources */,
 				992935AB2746926000745887 /* CreateTagSheet.swift in Sources */,
-				992935AD2748146900745887 /* EditStackScreen.swift in Sources */,
 				992935A927460C7300745887 /* FlashcardManager.swift in Sources */,
 				998885D4274A0E47004620E1 /* ViewFlashcardScreen.swift in Sources */,
 				E7A7E9652745DC9B00CBFB4F /* CreateFlashcardSheet.swift in Sources */,

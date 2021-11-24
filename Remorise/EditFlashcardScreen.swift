@@ -182,10 +182,6 @@ struct EditFlashcardScreen: View {
             .fullScreenCover(isPresented: $showHomeScreen, content: {
                 ContentView()
             })
-            
-            .fullScreenCover(isPresented: $showEditStackScreen, content: {
-                EditStackScreen(flashcards: [Flashcard(question: "", answer: "")], dismiss: {_ in })
-            })
             .toolbar {
     
                    
