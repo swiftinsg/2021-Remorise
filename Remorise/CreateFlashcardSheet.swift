@@ -1,13 +1,21 @@
 import SwiftUI
 import Foundation
 
-struct CreateFlashcardSheet: View {
-    @State private var flashcardStacks = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [])
-    @State private var showTagSheet = true
+struct CreateFlashcardSheet: View
+{
+    
+    @State private var flashcardStack: FlashcardStack // = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""]) //change made here [] -> [""]
+    @State private var showTagSheet = false
     @State private var showFlashcardSheet = false
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var flashcardManager: FlashcardManager
+    var save: (FlashcardStack) -> Void
+    @State private var isCreate: Bool
     
+    init (flashcardStack: FlashcardStack, save: @escaping (FlashcardStack) -> Void, isCreate: Bool) {
+        self._flashcardStack = State(initialValue: flashcardStack)
+        self.save = save
+        self._isCreate = State(initialValue: isCreate) //Copy and paste from the self._flashcardStack
+    }
     
     var body: some View
     {
@@ -19,7 +27,7 @@ struct CreateFlashcardSheet: View {
                 
                 VStack(alignment: .leading)
                 {
-                    Text("Create")
+                    Text(isCreate ? "Create" : "Edit" )
                         .foregroundColor(Color("Cyan Blue"))
                         .font(.system(size: 40.0, weight: .bold, design: .rounded))
                     
@@ -27,9 +35,11 @@ struct CreateFlashcardSheet: View {
                         .foregroundColor(Color("Maya Blue"))
                         .font(.system(size: 40.0, weight: .bold,design: .rounded))
                     
-                    Text("New")
-                        .foregroundColor(Color("Dodger Blue"))
-                        .font(.system(size: 40, weight: .bold, design: .rounded))
+                    if isCreate {
+                        Text("New")
+                            .foregroundColor(Color("Dodger Blue"))
+                            .font(.system(size: 40, weight: .bold, design: .rounded))
+                    }
                     
                     Text("Flashcard")
                         .foregroundColor(Color("Dodger Blue"))
@@ -64,7 +74,8 @@ struct CreateFlashcardSheet: View {
                         .foregroundColor(Color.init("Cyan Blue"))
                         .frame(height: 90)
                     
-                    CustomsTextEditor.init(placeholder:"Name of Stack", text: $flashcardStacks.flashcardName)
+                    CustomsTextEditor.init(placeholder:"Name of Stack", text: $flashcardStack.flashcardName)
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
                         .multilineTextAlignment(TextAlignment.center)
                         .font(.system(size: 25, weight: .bold))
                         
@@ -110,7 +121,7 @@ struct CreateFlashcardSheet: View {
         }
         .sheet(isPresented: $showTagSheet, content: {
             CreateTagSheet(dismiss: { newTag in
-                if let newUnWrappedTag = newTag { flashcardStacks.flashcardTags.append(newUnWrappedTag)}
+                if let newUnWrappedTag = newTag { flashcardStack.flashcardTags.append(newUnWrappedTag)}
                 
                 showTagSheet = false
                 
@@ -146,8 +157,8 @@ struct CustomsTextEditor: View {
                     .fontWeight(.bold)
                     .font(.system(size: 25))
                     .accentColor(.green)
-                    
-                    
+                
+                
                     .padding(internalPadding)
                 
                 

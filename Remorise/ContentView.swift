@@ -9,30 +9,15 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""])
     @State private var showActiveRecallScreen = false
     @ObservedObject private var flashcardManager = FlashcardManager()
     @State private var isFlashcardPresented = false
     @State private var currentlyEditedStack: FlashcardStack? = nil
+   
+//    @State private var currentFlashcard: Int = 0
     @State private var currentlySelectedStack: FlashcardStack? = nil
-    @State private var userSelectedTag: String? = nil
-    var allTags: [String] {
-        var tags: Set<String> = []
-        for stack in flashcardManager.flashcardStacks {
-            for tag in stack.flashcardTags {
-                tags.insert(tag)
-                
-            }
-        }
-        return Array(tags)
-    }
-    var filteredStacks: [FlashcardStack] {
-        if let userSelectedTag = userSelectedTag {
-            return flashcardManager.flashcardStacks.filter { (stack) -> Bool in
-                stack.flashcardTags.contains(userSelectedTag)
-            }
-        }
-        return flashcardManager.flashcardStacks
-    }
+    
     
     var body: some View {
         VStack {
@@ -57,7 +42,7 @@ struct ContentView: View {
                     isFlashcardPresented = true
                     
                 }
-                label:
+            label:
                 {
                     Image(systemName: "plus")
                         .foregroundColor(Color("Oxford Blue"))
@@ -104,7 +89,6 @@ struct ContentView: View {
                                     .background(Color("ButtonStack Color"))
                                     .cornerRadius(30)
                         }
-                               
                     }
                 }
             }
