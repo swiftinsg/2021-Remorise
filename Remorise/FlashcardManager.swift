@@ -30,7 +30,7 @@ struct FlashcardStack: Codable, Identifiable, Equatable {
 
 class FlashcardManager: ObservableObject {
     
-    @Published var flashcardStacks: [FlashcardStack] = [FlashcardStack(flashcards: [], flashcardName: "", flashcardTags: [""])]
+    @Published var flashcardStacks: [FlashcardStack] = []
     
     func getArchiveURL() -> URL {
         let plistName = "flashcardData.plist"

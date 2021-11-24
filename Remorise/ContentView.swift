@@ -9,16 +9,33 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""])
+    //@State private var flashcardStacks: [FlashcardStack] = [FlashcardStack]
     @State private var showActiveRecallScreen = false
     @ObservedObject private var flashcardManager = FlashcardManager()
     @State private var isFlashcardPresented = false
     @State private var currentlyEditedStack: FlashcardStack? = nil
-    
-    //    @State private var currentFlashcard: Int = 0
     @State private var currentlySelectedStack: FlashcardStack? = nil
+    @State private var userSelectedTag: String? = nil
+    var allTags: [String] {
+        var tags: Set<String> = []
+        for stack in flashcardManager.flashcardStacks {
+            for tag in stack.flashcardTags {
+                tags.insert(tag)
+                
+            }
+        }
+        return Array(tags)
+    }
+    var filteredStacks: [FlashcardStack] {
+        if let userSelectedTag = userSelectedTag {
+            return flashcardManager.flashcardStacks.filter { (stack) -> Bool in
+                stack.flashcardTags.contains(userSelectedTag)
+            }
+        }
+        return flashcardManager.flashcardStacks
+    }
     
-    
+
     var body: some View {
         VStack {
             
@@ -65,7 +82,7 @@ struct ContentView: View {
                 {
                     Button
                     {
-                        
+                        userSelectedTag = nil
                     } label:
                     {
                         Text("All")
@@ -78,109 +95,117 @@ struct ContentView: View {
                     .background(Color("Beau Blue"))
                     .cornerRadius(30)
                     
-                    Button
-                    {
-                        
-                    } label:
-                    {
-                        ForEach (flashcardStack.flashcardTags, id: \.self) { tag in
-                            Text("#\(tag)")
-                                .foregroundColor(Color("Oxford Blue"))
-                                .font(.system(size: 15, weight: .regular, design: .rounded))
-                                .padding(15)
-                                .background(Color("ButtonStack Color"))
-                                .cornerRadius(30)
-                            
+                    
+                    ForEach (allTags, id: \.self) { tag in
+                        Button {
+                            userSelectedTag = tag
+                        } label: {
+                                Text("#\(tag)")
+                                    .foregroundColor(Color("Oxford Blue"))
+                                    .font(.system(size: 15, weight: .regular, design: .rounded))
+                                    .padding(15)
+                                    .background(Color("ButtonStack Color"))
+                                    .cornerRadius(30)
                         }
+                               
                     }
                     .padding()
                 }
             }
             .padding(.horizontal)
             
-            ScrollView {
-                ForEach(flashcardManager.flashcardStacks) { stack in
-                    
-                    
-                    
-                    ZStack(alignment: .topLeading)
-                    {
-                        RoundedRectangle(cornerRadius: 25,style: .continuous)
-                            .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
-                            .frame(maxWidth: .infinity)
-                        Group {
-                            HStack {
-                                Spacer()
-                                Menu {
-                                    Button(action: {
-                                        showActiveRecallScreen = true
-                                        
-                                    }) {
-                                        Label("Quiz!", systemImage: "arrowtriangle.forward.fill")
-                                    }
-                                    Button(action: {
-                                        currentlySelectedStack = stack
-                                    }) {
-                                        Label("Review", systemImage: "book.fill")
-                                    }
-                                    Button(action: {
-                                        currentlyEditedStack = stack
-                                    }) {
-                                        Label("Edit", systemImage: "pencil")
-                                    }
-                                } label: {
-                                    ZStack{
-                                        Circle()
-                                            .frame(width: 30, height: 30)
-                                            .foregroundColor(Color("Azure"))
-                                        Image(systemName: "list.bullet")
-                                            .foregroundColor(Color("Beau Blue"))
-                                        
-                                    }
-                                }
-                                .padding()
-                            }
-                            
-                            VStack(alignment:.leading)
-                            {
-                                
-                                
-                                
-                                Text("\(stack.flashcardName)")
-                                    .foregroundColor(Color("Azure"))
-                                    .font(.system(size: 40.0, weight: .bold, design: .rounded))
-                                    .padding()
-                                
-                                
-                                
+            
+            if flashcardManager.flashcardStacks.count != 0 {
+                ScrollView {
+                    ForEach(filteredStacks) { stack in
+                        
+                        
+                        
+                        ZStack(alignment: .topLeading)
+                        {
+                            RoundedRectangle(cornerRadius: 25,style: .continuous)
+                                .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
+                                .frame(maxWidth: .infinity)
+                            Group {
                                 HStack {
-                                    ForEach (stack.flashcardTags, id: \.self) { tag in
-                                        Text("#\(tag)")
-                                            .foregroundColor(Color("Oxford Blue"))
-                                            .font(.system(size: 15, weight: .regular, design: .rounded))
-                                            .padding(15)
-                                            .background(Color("ButtonStack Color"))
-                                            .cornerRadius(30)
+                                    Spacer()
+                                    Menu {
+                                        Button(action: {
+                                            showActiveRecallScreen = true
+                                            
+                                        }) {
+                                            Label("Quiz!", systemImage: "arrowtriangle.forward.fill")
+                                        }
+                                        Button(action: {
+                                            currentlySelectedStack = stack
+                                        }) {
+                                            Label("Review", systemImage: "book.fill")
+                                        }
+                                        Button(action: {
+                                            currentlyEditedStack = stack
+                                        }) {
+                                            Label("Edit", systemImage: "pencil")
+                                        }
+                                    } label: {
+                                        ZStack{
+                                            Circle()
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(Color("Azure"))
+                                            Image(systemName: "list.bullet")
+                                                .foregroundColor(Color("Beau Blue"))
+                                            
+                                        }
                                     }
+                                    .padding()
                                 }
                                 
-                                
-                                
-                                
-                                
-                                
+                                VStack(alignment:.leading)
+                                {
+                                    
+                                    
+                                    
+                                    Text("\(stack.flashcardName)")
+                                        .foregroundColor(Color("Azure"))
+                                        .font(.system(size: 40.0, weight: .bold, design: .rounded))
+                                        .padding()
+                                    
+                                    
+                                    
+                                    HStack {
+                                        ForEach (stack.flashcardTags, id: \.self) { tag in
+                                            Text("#\(tag)")
+                                                .foregroundColor(Color("Oxford Blue"))
+                                                .font(.system(size: 15, weight: .regular, design: .rounded))
+                                                .padding(15)
+                                                .background(Color("ButtonStack Color"))
+                                                .cornerRadius(30)
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                }
                             }
+                            .padding()
                         }
-                        .padding()
+                        .padding(.horizontal)
+                        
+                        
+                        
+                        
+                        
                     }
-                    .padding(.horizontal)
-                    
-                    
-                    
-                    
-                    
+                }
+            } else {
+                VStack{
+                Text("No flashcard stack created yet")
+                Text("Click the '+' button to get started")
                 }
             }
+            Spacer()
         }
         .onAppear {
             flashcardManager.loadFlashcards()

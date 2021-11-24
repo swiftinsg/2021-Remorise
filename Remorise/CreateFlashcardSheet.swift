@@ -4,7 +4,7 @@ import Foundation
 struct CreateFlashcardSheet: View
 {
     
-    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""]) //change made here [] -> [""]
+    @State private var flashcardStacks = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""]) //change made here [] -> [""]
     @State private var showTagSheet = true
     @State private var showFlashcardSheet = false
     @Environment(\.presentationMode) var presentationMode
@@ -71,7 +71,7 @@ struct CreateFlashcardSheet: View
                         .foregroundColor(Color.init("Cyan Blue"))
                         .frame(height: 90)
                     
-                    CustomsTextEditor.init(placeholder:"Name of Stack", text: $flashcardStack.flashcardName)
+                    CustomsTextEditor.init(placeholder:"Name of Stack", text: $flashcardStacks.flashcardName)
                         .multilineTextAlignment(TextAlignment.center)
                 }
                 .frame(height: 240)
@@ -92,7 +92,7 @@ struct CreateFlashcardSheet: View
                     .background(Color("Beau Blue"))
                     .clipShape(Circle())
                     
-                    ForEach (flashcardStack.flashcardTags, id: \.self) { tag in
+                    ForEach (flashcardStacks.flashcardTags, id: \.self) { tag in
                         Text("#\(tag)")
                             .foregroundColor(Color("Oxford Blue"))
                             .font(.system(size: 15))
@@ -112,18 +112,18 @@ struct CreateFlashcardSheet: View
         }
         .sheet(isPresented: $showTagSheet, content: {
             CreateTagSheet(dismiss: { newTag in
-                if let newUnWrappedTag = newTag { flashcardStack.flashcardTags.append(newUnWrappedTag)}
+                if let newUnWrappedTag = newTag { flashcardStacks.flashcardTags.append(newUnWrappedTag)}
                 
                             showTagSheet = false
                 
             })
         })
         .fullScreenCover(isPresented: $showFlashcardSheet, content: {
-            CreateFlashcardScreen(flashcards: $flashcardStack.flashcards, color:
-                $flashcardStack.myColor) { shouldSave in
+            CreateFlashcardScreen(flashcards: $flashcardStacks.flashcards, color:
+                $flashcardStacks.myColor) { shouldSave in
                 showFlashcardSheet = false
                 if shouldSave {
-                    flashcardManager.flashcardStacks.append(flashcardStack)
+                    flashcardManager.flashcardStacks.append(flashcardStacks)
                 }
                 presentationMode.wrappedValue.dismiss()
             }
