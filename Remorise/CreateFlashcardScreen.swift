@@ -26,6 +26,7 @@ struct CreateFlashcardScreen: View {
     @State private var currentFlashcard: Int = 0
     @Binding var flashcards: [Flashcard]
     @State private var showingDiscardFlashcardStackAlert = false
+    @State private var showingWarningAddingForEmptyCard = false
     @State private var showingDiscardFlashcardAlert = false
     @State private var showingWarningAddingForEmptyCard = false
     @State var flipped = false
@@ -96,9 +97,6 @@ struct CreateFlashcardScreen: View {
                             flashcards.append(Flashcard(question: "", answer: ""))
                             currentFlashcard += 1
                             flipped = false
-                            
-                            
-                            
                         } label: {
                             Image(systemName:"plus")
                                 .padding(.trailing)
