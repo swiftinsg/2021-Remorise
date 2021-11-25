@@ -4,7 +4,7 @@ import Foundation
 struct CreateFlashcardSheet: View
 {
     
-    @State private var flashcardStack: FlashcardStack // = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""]) //change made here [] -> [""]
+    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [])
     @State private var showTagSheet = false
     @State private var showFlashcardSheet = false
     @Environment(\.presentationMode) var presentationMode
@@ -182,6 +182,6 @@ struct CreateFlashcardSheet_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        CreateFlashcardSheet(flashcardStack: FlashcardStack(flashcards: [Flashcard(question: "What is Singapore?", answer: "A country")], flashcardName: "Test", flashcardTags: []), save: { _ in }, isCreate: true).environmentObject(FlashcardManager())
+        CreateFlashcardSheet(flashcardStack: FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: []), save: { _ in }, isCreate: true).environmentObject(FlashcardManager())
     }
 }
