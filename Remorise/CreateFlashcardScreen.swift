@@ -26,6 +26,7 @@ struct CreateFlashcardScreen: View {
     @State private var currentFlashcard: Int = 0
     @Binding var flashcards: [Flashcard]
     @State private var showingDiscardFlashcardStackAlert = false
+    @State private var showingWarningAddingForEmptyCard = false
     @State private var showingDiscardFlashcardAlert = false
     @State var flipped = false
     @State private var showHomeScreen = false
@@ -98,16 +99,26 @@ struct CreateFlashcardScreen: View {
                         }
                     } else {
                         Button {
+                            if (flashcards[currentFlashcard].question.isEmpty
+                                && flashcards[currentFlashcard].answer.isEmpty)
+                            {
+                                showingWarningAddingForEmptyCard.toggle()
+                                return
+                            }
+                            
                             flashcards.append(Flashcard(question: "", answer: ""))
                             currentFlashcard += 1
                             flipped = false
-                            
-                            
-                            
                         } label: {
                             Image(systemName:"plus")
                                 .padding(.trailing)
                                 .foregroundColor(.black)
+                        }
+                        .alert(isPresented: $showingWarningAddingForEmptyCard) {
+                            Alert(
+                                title: Text("Flashcard cannot be empty"),
+                                message: Text("Please provide question and answer.")
+                            )
                         }
                     }
                 } //end of HStack
