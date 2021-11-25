@@ -99,7 +99,7 @@ struct CreateFlashcardSheet: View
                             .background(Color("Beau Blue"))
                             .clipShape(Circle())
                             
-                            ForEach (flashcardStacks.flashcardTags, id: \.self) { tag in
+                            ForEach (flashcardStack.flashcardTags, id: \.self) { tag in
                                 Text("#\(tag)")
                                     .foregroundColor(Color("Oxford Blue"))
                                     .font(.system(size: 15))
@@ -111,7 +111,7 @@ struct CreateFlashcardSheet: View
                             }
                         
                     } //end of HStack
-                 //   .padding()
+                 
                 }
                 .padding()
                 
@@ -128,11 +128,11 @@ struct CreateFlashcardSheet: View
             })
         })
         .fullScreenCover(isPresented: $showFlashcardSheet, content: {
-            CreateFlashcardScreen(flashcards: $flashcardStacks.flashcards, color:
-                                    $flashcardStacks.myColor) { shouldSave in
-                showFlashcardSheet = false
+            CreateFlashcardScreen(flashcards: $flashcardStack.flashcards, color:
+                                                $flashcardStack.myColor) { shouldSave in
+                            showFlashcardSheet = false
                 if shouldSave {
-                    flashcardManager.flashcardStacks.append(flashcardStacks)
+                    save(flashcardStack)
                 }
                 presentationMode.wrappedValue.dismiss()
             }
@@ -182,6 +182,6 @@ struct CreateFlashcardSheet_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        CreateFlashcardSheet().environmentObject(FlashcardManager())
+        CreateFlashcardSheet(flashcardStack: FlashcardStack(flashcards: [Flashcard(question: "What is Singapore?", answer: "A country")], flashcardName: "Test", flashcardTags: []), save: { _ in }, isCreate: true).environmentObject(FlashcardManager())
     }
 }

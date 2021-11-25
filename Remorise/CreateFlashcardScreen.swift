@@ -2,9 +2,9 @@ import SwiftUI
 import Foundation
 
 enum MyColor: Int, Codable {
-   case lightBlue
-   case blue2
-   case darkBlue
+    case lightBlue
+    case blue2
+    case darkBlue
 }
 
 func getColor(color: MyColor) -> Color {
@@ -15,7 +15,7 @@ func getColor(color: MyColor) -> Color {
         return Color(UIColor(red: 102/255, green: 178/255, blue: 255/255, alpha: 1))
     case .darkBlue:
         return Color(UIColor(red: 0/255, green: 127/255, blue: 255/255, alpha: 1))
-
+        
     }
 }
 
@@ -27,10 +27,11 @@ struct CreateFlashcardScreen: View {
     @Binding var flashcards: [Flashcard]
     @State private var showingDiscardFlashcardStackAlert = false
     @State private var showingDiscardFlashcardAlert = false
+    @State private var showingWarningAddingForEmptyCard = false
     @State var flipped = false
     @State private var showHomeScreen = false
     @Binding var color: MyColor
-
+    
     var dismiss: (Bool) -> Void
     
     var body: some View {
@@ -62,7 +63,7 @@ struct CreateFlashcardScreen: View {
                             RoundedRectangle(cornerRadius: 25, style: .continuous)
                                 .fill(getColor(color: color))
                                 .frame(height: 220)
-
+                            
                             CustomTextEditor(placeholder: "Type question here...", bold: true, text: $flashcards[currentFlashcard].question)
                         }
                     }, back: {
@@ -73,18 +74,6 @@ struct CreateFlashcardScreen: View {
                             CustomTextEditor(placeholder: "Type answer here...", bold: false, text: $flashcards[currentFlashcard].answer)
                         }
                     })
-                    
-                    //                    ZStack(alignment: .topLeading) {
-                    //                        RoundedRectangle(cornerRadius: 25, style: .continuous)
-                    //                            .fill(Color(UIColor(red: 204/255, green: 229/255, blue: 255/255, alpha: 1)))
-                    //                            .frame(height: 220)
-                    //                        CustomTextEditor(placeholder: "Type question here...", text: $flashcards[currentFlashcard].question)
-                    //                            .font(.system(.body, design: .rounded))
-                    //                            .multilineTextAlignment(TextAlignment.center)
-                    //                            .frame(height: 220)
-                    //                    }
-                    
-                    
                     
                     if currentFlashcard != flashcards.count - 1 {
                         Button {
@@ -98,6 +87,12 @@ struct CreateFlashcardScreen: View {
                         }
                     } else {
                         Button {
+                            if (flashcards[currentFlashcard].question.isEmpty
+                                    && flashcards[currentFlashcard].answer.isEmpty)
+                            {
+                                showingWarningAddingForEmptyCard.toggle()
+                                return
+                            }
                             flashcards.append(Flashcard(question: "", answer: ""))
                             currentFlashcard += 1
                             flipped = false
@@ -108,6 +103,12 @@ struct CreateFlashcardScreen: View {
                             Image(systemName:"plus")
                                 .padding(.trailing)
                                 .foregroundColor(.black)
+                        }
+                        .alert(isPresented: $showingWarningAddingForEmptyCard) {
+                            Alert(
+                                title: Text("Flashcard cannot be empty"),
+                                message: Text("Please provide question and answer.")
+                            )
                         }
                     }
                 } //end of HStack
@@ -120,23 +121,23 @@ struct CreateFlashcardScreen: View {
                         }
                     } label: {
                         ZStack{
-                                HStack{
-                                    
-                                    Text("Flip")
-                                    Image(systemName:"rectangle.on.rectangle.angled")
-                                }
-                                .padding()
+                            HStack{
+                                
+                                Text("Flip")
+                                Image(systemName:"rectangle.on.rectangle.angled")
+                            }
+                            .padding()
                             
                             Capsule()
                                 .fill(Color(UIColor(red: 136/255, green: 131/255, blue: 131/255, alpha: 0.17)))
                                 .frame(width: 100, height: 50)
-                                
-                                    
+                            
+                            
                             
                             
                         }
                         .padding()
-                
+                        
                         
                         
                     }
@@ -177,7 +178,7 @@ struct CreateFlashcardScreen: View {
                 HStack(spacing: 30) {
                     Button(action: {
                         color = .lightBlue
-
+                        
                         
                     }){
                         ZStack{
@@ -188,7 +189,7 @@ struct CreateFlashcardScreen: View {
                     }
                     Button(action: {
                         color = .blue2
-
+                        
                         
                     }){
                         ZStack{
@@ -199,7 +200,7 @@ struct CreateFlashcardScreen: View {
                     }
                     Button(action: {
                         color = .darkBlue
-
+                        
                         
                     }){
                         ZStack{
@@ -323,10 +324,5 @@ struct FlipFlashcard<Front, Back>: View where Front: View, Back: View {
         .frame(height: 200)
         .frame(maxWidth: .infinity)
         
-        //            //tap gesture recogniser to flip flashcard
-        //            .onTapGesture {
-        //                flipFlashcard()
-        //            }
-        //            .rotation3DEffect(.degrees(flashcardRotation), axis: (x: 0, y: 1, z: 0))
     }
 } // end of FlipFlashcard struct

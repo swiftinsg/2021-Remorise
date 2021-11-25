@@ -9,14 +9,31 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""])
+    @State private var flashcardStack = FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [])
     @State private var showActiveRecallScreen = false
     @ObservedObject private var flashcardManager = FlashcardManager()
     @State private var isFlashcardPresented = false
     @State private var currentlyEditedStack: FlashcardStack? = nil
-   
-//    @State private var currentFlashcard: Int = 0
     @State private var currentlySelectedStack: FlashcardStack? = nil
+    @State private var userSelectedTag: String? = nil
+    var allTags: [String] {
+        var tags: Set<String> = []
+        for stack in flashcardManager.flashcardStacks {
+            for tag in stack.flashcardTags {
+                tags.insert(tag)
+                
+            }
+        }
+        return Array(tags)
+    }
+    var filteredStacks: [FlashcardStack] {
+        if let userSelectedTag = userSelectedTag {
+            return flashcardManager.flashcardStacks.filter { (stack) -> Bool in
+                stack.flashcardTags.contains(userSelectedTag)
+            }
+        }
+        return flashcardManager.flashcardStacks
+    }
     
     
     var body: some View {
@@ -186,7 +203,8 @@ struct ContentView: View {
                 Text("No flashcard stack created yet")
                 Text("Click the '+' button to get started")
                 }
-                .padding(.top, 150)
+                .padding(.top, 90)
+                .font(.system(size: 20))
             }
             Spacer()
         }
@@ -200,19 +218,28 @@ struct ContentView: View {
         }
         
         .fullScreenCover(isPresented: $isFlashcardPresented) {
-            CreateFlashcardSheet()
-                .environmentObject(flashcardManager)
+                    CreateFlashcardSheet(flashcardStack: FlashcardStack(flashcards: [Flashcard(question: "", answer: "")], flashcardName: "", flashcardTags: [""]), save: { newStack in
+                        
+                        flashcardManager.flashcardStacks.append(newStack)
+                    }, isCreate: true)
+                    
+                                
         }
         .fullScreenCover(isPresented: $showActiveRecallScreen, content: {
             ActiveRecallScreen()
         })
         
-        .fullScreenCover(item: $currentlySelectedStack ) { i in
-            ViewFlashcardScreen(flashcards: i.flashcards)
-        }
+        .fullScreenCover(item: $currentlyEditedStack ) { i in
+                    CreateFlashcardSheet(flashcardStack: i, save: { newStack in
+                        
+                        let index = flashcardManager.flashcardStacks.firstIndex(of: i)!
+                        flashcardManager.flashcardStacks[index] = newStack
+                        
+                    }, isCreate: false)
+                }
         
     } // Vstack
-} // body View
+} // body view
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
