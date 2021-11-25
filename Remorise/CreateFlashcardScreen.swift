@@ -28,7 +28,6 @@ struct CreateFlashcardScreen: View {
     @State private var showingDiscardFlashcardStackAlert = false
     @State private var showingWarningAddingForEmptyCard = false
     @State private var showingDiscardFlashcardAlert = false
-    @State private var showingWarningAddingForEmptyCard = false
     @State var flipped = false
     @State private var showHomeScreen = false
     @Binding var color: MyColor
